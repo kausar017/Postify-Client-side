@@ -9,15 +9,16 @@ const SosalLogin = () => {
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
 
-    const Google = UseAuth()
+    const { handaleGoogle } = UseAuth()
 
-    const handaleGoogleLogin = () => {
+    const handaleGoogleLogin = (e) => {
+        e.preventDefault()
         console.log('hello');
-        Google()
+        handaleGoogle()
     }
     return (
         <div>
-            <button onClick={(e) => handaleGoogleLogin(e)} className='p-2 border-black border rounded-full'><IoLogoGoogle size={30}></IoLogoGoogle > </button>
+            <button onClick={handaleGoogleLogin} className='p-2 border-black border rounded-full'><IoLogoGoogle size={30}></IoLogoGoogle > </button>
         </div>
     );
 };

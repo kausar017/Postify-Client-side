@@ -1,10 +1,12 @@
 import Lottie from "lottie-react";
 import { Helmet } from "react-helmet-async";
 import loginLottie from "../../../assets/Lottify/login.json";
-import { IoEyeOff, IoEyeSharp } from "react-icons/io5";
+import { IoEyeOff, IoEyeSharp, IoLogoGoogle } from "react-icons/io5";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import SosalLogin from "../SosalLogin/SosalLogn";
+import { useContext } from "react";
+import { AuthContext } from "../AuthProvaider/AuthProvaider";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -12,12 +14,16 @@ const Login = () => {
         setShowPassword(!showPassword);
     };
 
+
+    const { handalLogin } = useContext(AuthContext)
+
     const handleLoginSubmit = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
         // Call your login function here (example: login(email, password))
     };
+
 
     return (
         <>
