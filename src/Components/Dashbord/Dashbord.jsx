@@ -22,7 +22,7 @@ const Dashbord = () => {
                     <NavLink to={'/'} className={''}>Home</NavLink>
 
                 </div>
-                <div className="">
+                <div className="col-span-10">
                     {/* outlet */}
                     <Outlet></Outlet>
                 </div>
