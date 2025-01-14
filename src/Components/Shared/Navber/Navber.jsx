@@ -1,21 +1,34 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/Logo/Postify logo.png"
+import UseAuth from "../../AuthenTication/UseAuth/UseAuth";
+import toast from "react-hot-toast";
 
 const Navber = () => {
+
+    const { user, handalLogout } = UseAuth()
 
     const link = <>
         <NavLink><button className="btn btn-ghost btn-sm md:text-white">Home</button></NavLink>
         <NavLink><button className="btn btn-ghost btn-sm md:text-white">Membership</button></NavLink>
     </>
 
+    const logout = async () => {
+        try {
+            await handalLogout()
+            toast.success('logout success',{position: 'top-right'})
+        } catch {
+            toast.error('logout faield')
+        }
+    }
+
     return (
         <div className="bg-primary/50">
             <div className="navbar container mx-auto">
                 <div className="flex-1">
 
-                    <div className="btn btn-ghost text-xl">
+                    <Link className="btn btn-ghost text-xl">
                         <img className="w-full max-w-[100px]" src={logo} alt="" />
-                    </div>
+                    </Link>
                 </div>
                 <div className="flex-none">
                     <div className="max-sm:hidden">
@@ -30,27 +43,39 @@ const Navber = () => {
                         </div>
 
                     </div>
-                    <div>
-                        <Link to={'/login'} className="btn btn-sm">Join US</Link>
-                    </div>
-                    <div className="dropdown dropdown-end">
-                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
 
-                            <div className="w-10 rounded-full">
-                                <img
-                                    alt="Tailwind CSS Navbar component"
-                                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                    {user ?
+
+
+                        <div className="dropdown dropdown-end">
+
+
+                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+
+                                <div className="w-10 rounded-full">
+                                    <img
+                                        alt="Tailwind CSS Navbar component"
+                                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                                </div>
+
                             </div>
+                            <ul
+                                tabIndex={0}
+                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                                <span className="flex flex-col md:hidden">{link}</span>
+                                <li><a> {user?.displayName}</a> </li>
+                                <li><a>Dashboard</a></li>
+                                <li onClick={logout}><a>Logout</a></li>
+                            </ul>
                         </div>
-                        <ul
-                            tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                            <span className="flex flex-col md:hidden">{link}</span>
-                            <li><a> User name</a> </li>
-                            <li><a>Dashboard</a></li>
-                            <li><a>Logout</a></li>
-                        </ul>
-                    </div>
+
+                        :
+                        <div>
+                            <Link to={'/login'} className="btn btn-sm">Join US</Link>
+                        </div>
+
+                    }
+
                 </div>
             </div>
         </div>

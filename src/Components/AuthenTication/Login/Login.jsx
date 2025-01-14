@@ -8,7 +8,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import SosalLogin from "../SosalLogin/SosalLogn";
 import UseAuth from "../UseAuth/UseAuth";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -21,8 +21,6 @@ const Login = () => {
     const from = location.state?.from?.pathname || '/';
 
     const { handalLogin } = UseAuth()
-
-
     const {
         register,
         handleSubmit,
@@ -34,10 +32,16 @@ const Login = () => {
         console.log(data)
         try {
             await handalLogin(data.email, data.password)
-            toast.success('Successfully logged in');
+            toast.success('Login Successfuly', {
+                duration: 3000,
+            });
+
             navigate(from, { replace: true });
         } catch (error) {
-            toast.error('Login failed', error);
+            toast.error('Login Failed!', {
+                duration: 3000,
+            });
+
         }
     }
 
@@ -52,8 +56,8 @@ const Login = () => {
                     <div className="flex flex-col justify-center items-center min-h-screen">
                         <div className="grid lg:grid-cols-2 md:grid-cols-1 items-center justify-center w-full max-w-7xl mx-auto border shadow-xl md:p-5">
                             <div className="flex flex-col justify-center items-center">
-                                <h1 className="text-5xl font-bold">Login now!</h1>
-                                <div className="py-6">
+                                <h1 className="text-5xl font-bold">Join now!</h1>
+                                <div className="py-6 xl:block lg:block max-sm:hidden md:hidden">
                                     <Lottie className="w-full max-w-96" animationData={loginLottie}></Lottie>
                                 </div>
                             </div>
@@ -120,6 +124,8 @@ const Login = () => {
                                     </div>
                                     <div className="form-control mt-6">
                                         <button className="btn btn-secondary">Login</button>
+                                        {/* <Toaster /> */}
+
                                     </div>
                                     <div className="text-center text-[#cf8d29b3]">
                                         New here? Create a New Account please{" "}

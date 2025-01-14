@@ -1,8 +1,8 @@
 
 import { IoLogoGoogle } from "react-icons/io5";
 import { useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import UseAuth from "../UseAuth/UseAuth";
+import toast from "react-hot-toast";
 
 const SosalLogin = () => {
     const navigate = useNavigate();
@@ -11,10 +11,16 @@ const SosalLogin = () => {
 
     const { handaleGoogle } = UseAuth()
 
-    const handaleGoogleLogin = (e) => {
+    const handaleGoogleLogin = async (e) => {
         e.preventDefault()
-        console.log('hello');
-        handaleGoogle()
+        // console.log('hello');
+        try {
+            await handaleGoogle()
+            toast.success('Google Login success')
+            navigate(from, { replace: true });
+        } catch (error) {
+            toast.error('Login Faield', error)
+        }
     }
     return (
         <div>

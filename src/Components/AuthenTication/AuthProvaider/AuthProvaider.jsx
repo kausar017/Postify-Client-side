@@ -60,6 +60,8 @@ const AuthProvaider = ({ children }) => {
                 setUser(currentUser);
             }
             setLooder(false);
+            console.log(currentUser);
+
         });
         return () => {
             unsubscrive();
@@ -74,7 +76,7 @@ const AuthProvaider = ({ children }) => {
 };
 
 AuthProvaider.propTypes = {
-    children: PropTypes.node.isRequired, // Corrected from `func` to `node`
+    children: PropTypes.node.isRequired,
 };
 
 export default AuthProvaider;
