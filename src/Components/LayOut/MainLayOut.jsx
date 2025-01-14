@@ -9,7 +9,7 @@ const MainLayOut = () => {
             {/* Navber */}
             <Navber></Navber>
             {/* outlet */}
-            <div className="min-h-[calc(100vh-70px)]">
+            <div className="min-h-[calc(100vh-8px)] pt-16">
                 <Outlet></Outlet>
 
             </div>

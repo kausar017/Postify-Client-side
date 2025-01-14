@@ -3,7 +3,7 @@ import logo from "../../../assets/Logo/Postify logo.png"
 const Footer = () => {
     return (
         <div>
-            <footer className="footer bg-primary/50 text-white p-10">
+            <footer className="footer bg-[#A480FF] text-white p-10">
                 <aside>
                     <img className="w-full max-w-[150px]" src={logo} alt="" />
                     <p>

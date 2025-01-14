@@ -22,7 +22,7 @@ const Navber = () => {
     }
 
     return (
-        <div className="bg-primary/50">
+        <div className=" bg-[#A480FF] fixed w-full z-10 transition-all duration-700">
             <div className="navbar container mx-auto">
                 <div className="flex-1">
 
@@ -74,12 +74,12 @@ const Navber = () => {
                             </div>
                             <ul
                                 tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                                <li><a> {user?.displayName}</a> </li>
+                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-5 shadow space-y-2">
+                                <li className="ml-3">{user?.displayName}</li>
                                 <span className="flex flex-col md:hidden">{link}</span>
-                                <li><a>Dashboard</a></li>
-                                <li onClick={logout}><a>Logout</a></li>
-                            </ul>
+                                <span className="ml-3 "><Link to={'/dasbord'}>Dashboard</Link></span>
+                                <li className="ml-3" onClick={logout}>Logout</li>
+                            </ul>   
                         </div>
 
                         :

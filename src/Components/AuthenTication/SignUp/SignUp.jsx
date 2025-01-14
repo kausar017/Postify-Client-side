@@ -38,7 +38,7 @@ const SignUp = () => {
                 duration: 3000, position: "top-right"
             });
 
-            reset() 
+            reset()
             navigate(from, { replace: true });
         }
         catch (error) {
@@ -62,7 +62,7 @@ const SignUp = () => {
             <div>
                 <div className="flex flex-col justify-center items-center min-h-screen">
                     <div className="grid lg:grid-cols-2 md:grid-cols-1 items-center justify-center w-full max-w-7xl mx-auto border shadow-xl md:p-5">
-                        <form onSubmit={handleSubmit(onSubmit)} className="card-body w-full">
+                        <form onSubmit={handleSubmit(onSubmit)} className="card-body w-full border">
                             <h1 className="text-5xl font-bold text-center py-3 max-sm:block md:block lg:hidden">singup now!</h1>
                             <img className="w-full max-w-[120px] border bg-black opacity-40 mx-auto" src={logo} alt="" />
                             <div className="form-control">

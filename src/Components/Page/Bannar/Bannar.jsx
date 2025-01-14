@@ -18,16 +18,10 @@ const Bannar = () => {
                 backgroundImage: 'url(https://wallpapers.com/images/hd/720p-social-background-1280-x-720-jogr0kdxvgk5gnwt.jpg)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
-            }}
-
-        >
-
+            }}>
             <div
-                className={`hero min-h-[500px] text-black transition duration-700 ${isSearchActive ? 'bg-black opacity-60 backdrop-blur-md' : ''}`}
-
-            >
-
-                <div className={`w-full max-w-lg transition-all duration-700 relative ${isSearchActive ? 'hover:max-w-xl' : ''}`}>
+                className={`hero lg:min-h-[500px] md:min-h-[300px] max-sm:min-h-[200px] text-black transition duration-700 ${isSearchActive ? 'bg-black opacity-60 backdrop-blur-md' : ''}`}>
+                <div className={`w-full md:max-w-lg max-sm:max-w-xs  transition-all duration-700 relative ${isSearchActive ? 'hover:max-w-xl' : ''}`}>
 
                     <input
                         type="text"
@@ -37,7 +31,7 @@ const Bannar = () => {
                         className="input input-bordered bg-white w-full placeholder:text-black rounded-full" />
 
                 </div>
-               
+
             </div>
         </div>
     );
