@@ -8,14 +8,14 @@ const Navber = () => {
     const { user, handalLogout } = UseAuth()
 
     const link = <>
-        <NavLink><button className="btn btn-ghost btn-sm md:text-white">Home</button></NavLink>
+        <NavLink to={'/'}><button className="btn btn-ghost btn-sm md:text-white">Home</button></NavLink>
         <NavLink><button className="btn btn-ghost btn-sm md:text-white">Membership</button></NavLink>
     </>
 
     const logout = async () => {
         try {
             await handalLogout()
-            toast.success('logout success',{position: 'top-right'})
+            toast.success('logout success', { position: 'top-right' })
         } catch {
             toast.error('logout faield')
         }
@@ -51,19 +51,32 @@ const Navber = () => {
 
 
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                {
+                                    user ?
 
-                                <div className="w-10 rounded-full">
-                                    <img
-                                        alt="Tailwind CSS Navbar component"
-                                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                                </div>
+                                        <div className="w-10 rounded-full">
+                                            <img
+                                                referrerPolicy="no-referrer"
+                                                alt={user?.photoURL}
+                                                src={user?.photoURL} />
+                                        </div>
+                                        :
+
+                                        <div className="w-10 rounded-full">
+                                            <img
+                                                alt="https://i.postimg.cc/yxBM0XS4/user.png"
+                                                src="https://i.postimg.cc/yxBM0XS4/user.png" />
+                                        </div>
+
+                                }
+
 
                             </div>
                             <ul
                                 tabIndex={0}
                                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                                <span className="flex flex-col md:hidden">{link}</span>
                                 <li><a> {user?.displayName}</a> </li>
+                                <span className="flex flex-col md:hidden">{link}</span>
                                 <li><a>Dashboard</a></li>
                                 <li onClick={logout}><a>Logout</a></li>
                             </ul>
