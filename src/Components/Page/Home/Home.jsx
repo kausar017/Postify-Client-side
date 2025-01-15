@@ -10,7 +10,7 @@ const Home = () => {
             </Helmet>
 
             {/* Bannar */}
-            <Bannar></Bannar>
+            {/* <Bannar></Bannar> */}
             {/* posted data */}
             <PostedData></PostedData>
         </div>

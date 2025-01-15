@@ -4,33 +4,15 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "../Loader/Loader";
 import { format } from "date-fns";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useState } from "react";
 
 const PostDetals = () => {
 
-
-
-    const { id } = useParams()
-    // console.log(id);
-
     const axiosPiblic = useAxiosPiblic()
-
-    const { data: detals = [], isLoading, error } = useQuery({
-        queryKey: ['detals'],
-        queryFn: async () => {
-            const res = await axiosPiblic(`/addpost/${id}`)
-            return res;
-        }
-    })
-    // console.log(detals?.data?.userPhoto);
-
-    const { authorEmail, image, authorName, postTitle, postDescription, tag, carentTime, upVote, downVote } = detals?.data || {}
-
-    if (isLoading) {
-        return <Loader></Loader>
-    }
-    if (error) {
-        <p>Error fetching post details!</p>;
-    }
+    const [upVote, setUpVote] = useState(0);
+    const [downVote, setDownVote] = useState(0);
+    const { id } = useParams()
 
     const {
         register,
@@ -40,10 +22,71 @@ const PostDetals = () => {
     } = useForm()
 
     const onSubmit = async (data) => {
-        console.log(data);
+        // console.log(data);
+        const info = {
+            comentId: _id,
+            ...data
+        }
 
+        try {
+
+            await axiosPiblic.post(`/coment`, info);
+            toast.success(`Coment successfuly`);
+            reset()
+            // navigate(from, { replace: true });
+        } catch (errors) {
+            toast.error("coment not added");
+        }
     }
-    
+
+
+
+
+
+    const { data: detals = [], isLoading, error } = useQuery({
+        queryKey: ['detals'],
+        queryFn: async () => {
+            const res = await axiosPiblic(`/addpost/${id}`)
+            return res;
+        }
+    })
+
+    const { authorEmail, image, authorName, postTitle, postDescription, tag, carentTime, _id } = detals?.data || {}
+
+    if (isLoading) {
+        return <Loader></Loader>
+    }
+    if (error) {
+        <p>Error fetching post details!</p>;
+    }
+
+    const handleUpVote = async () => {
+        try {
+            const response = await axiosPiblic.put(`/upVote/${_id}`, {
+                upVote: upVote + 1,
+            });
+            setUpVote(response.data.upVote);
+            toast.success("Upvoted successfully!");
+        } catch (error) {
+            console.error("Upvote failed:", error);
+            toast.error("Upvote failed!");
+        }
+    };
+
+    const handleDownVote = async () => {
+        try {
+            const response = await axiosPiblic.put(`/downVote/${_id}`, {
+                downVote: downVote + 1,
+            });
+            setDownVote(response.data.downVote);
+            toast.success("Downvoted successfully!");
+        } catch (error) {
+            console.error("Downvote failed:", error);
+            toast.error("Downvote failed!");
+        }
+    };
+
+
 
     return (
         <>
@@ -68,19 +111,21 @@ const PostDetals = () => {
                             </div>
 
                             <div className="flex items-center justify-between mb-6">
-                                <span className="text-md text-gray-500">{format(carentTime, 'HH:mm:ss')}</span>
+                                <span className="text-md text-gray-500">{format(carentTime, 'hh:mm:ss a')}</span>
                                 <span className="px-3 py-1 text-sm bg-blue-100 text-blue-800 rounded-full">{tag}</span>
                             </div>
 
                             <div className="flex justify-between items-center mb-6">
                                 <div className="flex items-center ">
-                                    <button className="btn btn-success btn-outline mr-4 text-white">
+                                    <button onClick={handleUpVote} className="btn btn-success btn-outline mr-4 text-white">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 24 24" fill="#ffff" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
 
-                                        UpVote {upVote}</button>
-                                    <button className="btn btn-error btn-outline text-white">
+                                        UpVote 
+                                    </button>
+                                    <button onClick={handleDownVote} className="btn btn-error btn-outline text-white">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 24 24" fill="#ffff" stroke="#000000" strokeWidth="2" strokeWinecap="round" strokeLinejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path></svg>
-                                        DownVote {downVote}</button>
+                                        DownVote
+                                    </button>
                                 </div>
                                 <button className="btn btn-primary btn-outline">
 
@@ -91,10 +136,26 @@ const PostDetals = () => {
                             <div className="mt-8">
                                 <h4 className="text-xl font-semibold mb-4">Comments</h4>
                                 <form onSubmit={handleSubmit(onSubmit)} className="border-t pt-4">
-                                    <textarea placeholder="Please coment" name="coment" {...register("coment")} className="textarea textarea-bordered textarea-lg w-full"></textarea>
-                                    {/* <input type="text" name="text" id="" className="input input-bordered" /> */}
+                                    <textarea
+                                        placeholder="Please comment"
+                                        name="coment"
+                                        {...register("coment", {
+                                            required: "Comment is required",
+                                            validate: {
+                                                minWords: (value) => {
+                                                    const wordCount = value.trim().split(/\s+/).length;
+                                                    return wordCount >= 10 || "Comment must have at least 10 words";
+                                                },
+                                            },
+                                        })}
+                                        className="textarea textarea-bordered textarea-lg w-full"
+                                    ></textarea>
+                                    {errors.coment && (
+                                        <p className="text-red-500 text-sm mt-1">{errors.coment.message}</p>
+                                    )}
                                     <button className="btn btn-accent">Comment</button>
                                 </form>
+
                             </div>
                         </div>
                     )

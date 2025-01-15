@@ -31,7 +31,9 @@ const Router = createBrowserRouter([
       },
       {
         path: '/detals/:id',
-        element: <PostDetals></PostDetals>
+        element: <PrivetRout>
+          <PostDetals></PostDetals>
+        </PrivetRout>
       },
     ],
   },
