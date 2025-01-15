@@ -32,10 +32,12 @@ const AddPost = () => {
             postTitle: data.Title,
             postDescription: data.Description,
             tag: data.Tag,
+            carentTime: new Date(),
             upVote: 0,
             downVote: 0,
             UserEmail: user?.email,
-            UserName: user?.displayName
+            UserName: user?.displayName,
+            userPhoto: user?.photoURL
         }
         // console.log(userInfo);
 
@@ -45,7 +47,7 @@ const AddPost = () => {
             toast.success(`Post created successfully`);
             reset()
             navigate(from, { replace: true });
-        } catch (error) {
+        } catch (errors) {
             toast.error("Error creating post.");
         }
 
@@ -60,7 +62,7 @@ const AddPost = () => {
                         <label className="label">
                             <span className="label-text">Author Image</span>
                         </label>
-                        <input type="url"{...register("photo url")} placeholder="photoUrl" {...register("photo url")} className="input input-bordered" required />
+                        <input type="url" placeholder="photoUrl" {...register("photoUrl")} className="input input-bordered" required />
                     </div>
                     <div className="form-control">
                         <label className="label">

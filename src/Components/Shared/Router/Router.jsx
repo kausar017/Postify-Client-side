@@ -8,6 +8,8 @@ import Home from "../../Page/Home/Home";
 import Error from "../../Page/Error/Error";
 import Dashbord from "../../Dashbord/Dashbord";
 import AddPost from "../../Dashbord/DashbordPage/AddPost/AddPost";
+import PrivetRout from "../../AuthenTication/PrivetRoute/PrivetRout";
+import PostDetals from "../../Page/PostDetals/PostDetals";
 
 const Router = createBrowserRouter([
   {
@@ -27,12 +29,18 @@ const Router = createBrowserRouter([
         path: '/signup',
         element: <SignUp></SignUp>
       },
+      {
+        path: '/detals/:id',
+        element: <PostDetals></PostDetals>
+      },
     ],
   },
   {
     // dashbord
     path: '/dasbord',
-    element: <Dashbord></Dashbord>,
+    element: <PrivetRout>
+      <Dashbord></Dashbord>
+    </PrivetRout>,
     children: [
       {
         path: '/dasbord/addpost',

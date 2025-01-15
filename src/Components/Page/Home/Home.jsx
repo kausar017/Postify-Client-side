@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import Bannar from "../Bannar/Bannar";
+import PostedData from "../PostedData/PostedData";
 
 const Home = () => {
     return (
@@ -10,6 +11,8 @@ const Home = () => {
 
             {/* Bannar */}
             <Bannar></Bannar>
+            {/* posted data */}
+            <PostedData></PostedData>
         </div>
     );
 };
