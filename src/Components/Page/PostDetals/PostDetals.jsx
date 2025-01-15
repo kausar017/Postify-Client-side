@@ -6,6 +6,11 @@ import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { AiFillDislike, AiFillLike } from "react-icons/ai";
+import { FaFacebook, FaTwitter } from "react-icons/fa6";
+import { FacebookShareButton, LinkedinShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share';
+import { IoLogoLinkedin, IoLogoWhatsapp } from "react-icons/io5";
+
 
 const PostDetals = () => {
 
@@ -38,9 +43,6 @@ const PostDetals = () => {
             toast.error("coment not added");
         }
     }
-
-
-
 
 
     const { data: detals = [], isLoading, error } = useQuery({
@@ -87,6 +89,8 @@ const PostDetals = () => {
     };
 
 
+    const shareUrl = "https://example.com"; 
+    const title = "Check this awesome website!";
 
     return (
         <>
@@ -118,20 +122,44 @@ const PostDetals = () => {
                             <div className="flex justify-between items-center mb-6">
                                 <div className="flex items-center ">
                                     <button onClick={handleUpVote} className="btn btn-success btn-outline mr-4 text-white">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 24 24" fill="#ffff" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
-
-                                        UpVote 
+                                        <AiFillLike size={20}></AiFillLike>
+                                        UpVote
                                     </button>
                                     <button onClick={handleDownVote} className="btn btn-error btn-outline text-white">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 24 24" fill="#ffff" stroke="#000000" strokeWidth="2" strokeWinecap="round" strokeLinejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path></svg>
+                                        <AiFillDislike size={20}></AiFillDislike>
                                         DownVote
                                     </button>
                                 </div>
-                                <button className="btn btn-primary btn-outline">
 
+                                <button onClick={() => document.getElementById('my_modal_2').showModal()} className="btn btn-primary btn-outline">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 24 24" fill="#ffff" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                                     Share</button>
                             </div>
+
+                            {/* Open the modal using document.getElementById('ID').showModal() method */}
+                            <dialog id="my_modal_2" className="modal">
+                                <div className="modal-box">
+                                    <div className="share-buttons flex items-center justify-center space-x-7">
+                                        <FacebookShareButton url={shareUrl} quote={title}>
+                                            <FaFacebook size={40}></FaFacebook>
+                                        </FacebookShareButton>
+                                        <TwitterShareButton url={shareUrl} title={title}>
+                                            <FaTwitter size={40}></FaTwitter>
+                                        </TwitterShareButton>
+                                        <WhatsappShareButton url={shareUrl} title={title}>
+                                            <IoLogoWhatsapp size={40}></IoLogoWhatsapp>
+                                        </WhatsappShareButton>
+                                        <LinkedinShareButton  url={shareUrl} title={title}>
+                                            <IoLogoLinkedin size={40}></IoLogoLinkedin>
+                                        </LinkedinShareButton>
+                                    </div>
+
+                                </div>
+                                <form method="dialog" className="modal-backdrop">
+                                    <button>close</button>
+                                </form>
+                            </dialog>
+                            {/* Open the modal using document.getElementById('ID').showModal() method */}
 
                             <div className="mt-8">
                                 <h4 className="text-xl font-semibold mb-4">Comments</h4>
