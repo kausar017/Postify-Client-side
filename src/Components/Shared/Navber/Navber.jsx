@@ -9,7 +9,7 @@ const Navber = () => {
 
     const link = <>
         <NavLink to={'/'}><button className="btn btn-ghost btn-sm md:text-white">Home</button></NavLink>
-        <NavLink><button className="btn btn-ghost btn-sm md:text-white">Membership</button></NavLink>
+        <NavLink to={'/member'}><button className="btn btn-ghost btn-sm md:text-white">Membership</button></NavLink>
     </>
 
     const logout = async () => {

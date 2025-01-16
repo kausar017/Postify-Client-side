@@ -10,7 +10,9 @@ import Dashbord from "../../Dashbord/Dashbord";
 import AddPost from "../../Dashbord/DashbordPage/AddPost/AddPost";
 import PrivetRout from "../../AuthenTication/PrivetRoute/PrivetRout";
 import PostDetals from "../../Page/PostDetals/PostDetals";
-
+import Membership from "../../Page/Membership/Membership";
+import UserProfile from "../../Dashbord/DashbordPage/UserPorfile/userProfile";
+import MyPost from "../../Dashbord/DashbordPage/MyPost/MyPost";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -35,6 +37,12 @@ const Router = createBrowserRouter([
           <PostDetals></PostDetals>
         </PrivetRout>
       },
+      {
+        path: '/member',
+        element: <PrivetRout>
+          <Membership></Membership>
+        </PrivetRout>
+      },
     ],
   },
   {
@@ -45,9 +53,23 @@ const Router = createBrowserRouter([
     </PrivetRout>,
     children: [
       {
+        path: '/dasbord',
+        element: <PrivetRout>
+          <UserProfile></UserProfile>
+        </PrivetRout>
+      },
+      {
         path: '/dasbord/addpost',
-        element: <AddPost></AddPost>
-      }
+        element: <PrivetRout>
+          <AddPost></AddPost>
+        </PrivetRout>
+      },
+      {
+        path: '/dasbord/myPost',
+        element: <PrivetRout>
+          <MyPost></MyPost>
+        </PrivetRout>
+      },
     ]
   }
 ]);

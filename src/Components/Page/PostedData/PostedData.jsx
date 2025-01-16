@@ -5,6 +5,7 @@ import Loader from '../Loader/Loader';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Bannar from '../Bannar/Bannar';
+import { FaDatabase } from 'react-icons/fa6';
 
 
 const PostedData = () => {
@@ -89,7 +90,7 @@ const PostedData = () => {
                                             </div>
                                             <div className='flex flex-col'>
                                                 <span className="text-md text-gray-500 ">{format(new Date(item?.carentTime), 'hh:mm:ss a')}</span>
-                                                <span>{item?.tag}</span>
+                                                <span className='bg-lime-500/50  rounded-full font-bold text-center px-2'>{item?.tag}</span>
                                             </div>
                                         </div>
                                         <div className="flex justify-between items-center mt-4">
@@ -115,7 +116,10 @@ const PostedData = () => {
                         })}
                     </div>
                 ) : (
-                    <h3 className="text-center my-10 text-3xl font-bold">Data not Found</h3>
+                    <div className='flex flex-col justify-center items-center'>
+                        <h3 className="text-center my-10 text-3xl font-bold">Data not Found</h3>
+                        <FaDatabase size={50}></FaDatabase>
+                    </div>
                 )}
             </div>
 

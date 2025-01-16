@@ -54,7 +54,7 @@ const AddPost = () => {
     }
 
     return (
-        <div className='w-full max-w-2xl mx-auto my-5'>
+        <div className='w-full max-w-2xl mx-auto my-5 '>
             <div className="card bg-base-100 shadow-lg">
                 <h3 className='text-3xl font-bold text-center py-3'>Add food</h3>
                 <form onSubmit={handleSubmit(onSubmit)} className=" p-5">

@@ -89,7 +89,7 @@ const PostDetals = () => {
     };
 
 
-    const shareUrl = "https://example.com"; 
+    const shareUrl = "https://kausarmiaportfolio.netlify.app";
     const title = "Check this awesome website!";
 
     return (
@@ -98,7 +98,10 @@ const PostDetals = () => {
             <div>
                 {
                     !detals ? (
-                        <p className="text-center text-black text-4xl">Data not found</p>
+                        <div className='flex flex-col justify-center items-center'>
+                            <h3 className="text-center my-10 text-3xl font-bold">Data not Found</h3>
+                            <FaDatabase size={50}></FaDatabase>
+                        </div>
                     ) : (
                         <div key={detals?._id} className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-xl">
                             <div className="flex items-center mb-6">
@@ -149,7 +152,7 @@ const PostDetals = () => {
                                         <WhatsappShareButton url={shareUrl} title={title}>
                                             <IoLogoWhatsapp size={40}></IoLogoWhatsapp>
                                         </WhatsappShareButton>
-                                        <LinkedinShareButton  url={shareUrl} title={title}>
+                                        <LinkedinShareButton url={shareUrl} title={title}>
                                             <IoLogoLinkedin size={40}></IoLogoLinkedin>
                                         </LinkedinShareButton>
                                     </div>
