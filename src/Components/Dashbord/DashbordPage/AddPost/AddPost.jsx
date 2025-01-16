@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form';
 import UseAuth from '../../../AuthenTication/UseAuth/UseAuth';
 import useAxiosPiblic from '../../../AllHooks/useAxiosPiblic';
 import toast from 'react-hot-toast';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 const AddPost = () => {
 
@@ -13,7 +14,7 @@ const AddPost = () => {
 
     const navigate = useNavigate()
     const location = useLocation()
-    const from = location.state?.from?.pathname || '/';
+    const from = location.state?.from?.pathname || '/dasbord/myPost';
 
     const {
         register,
@@ -53,62 +54,100 @@ const AddPost = () => {
 
     }
 
-    return (
-        <div className='w-full max-w-2xl mx-auto my-5 '>
-            <div className="card bg-base-100 shadow-lg">
-                <h3 className='text-3xl font-bold text-center py-3'>Add food</h3>
-                <form onSubmit={handleSubmit(onSubmit)} className=" p-5">
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Author Image</span>
-                        </label>
-                        <input type="url" placeholder="photoUrl" {...register("photoUrl")} className="input input-bordered" required />
-                    </div>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Author Name</span>
-                        </label>
-                        <input type="text"{...register("name")} placeholder="password" className="input input-bordered" required />
-                    </div>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Author Email</span>
-                        </label>
-                        <input type="email"{...register("Email")} placeholder="password" className="input input-bordered" required />
-                    </div>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Post Title</span>
-                        </label>
-                        <input type="text"{...register("Title")} placeholder="password" className="input input-bordered" required />
-                    </div>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Post Description</span>
-                        </label>
-                        <textarea
-                            {...register("Description")} placeholder="Description"
-                            className="textarea textarea-bordered textarea-lg w-full"></textarea>
+    // recent data fatching
+    const { isLoading, error, data: recent = [] } = useQuery({
+        queryKey: ['recentData'],
+        queryFn: async () => {
+            const res = await axiosPiblic.get(`/count?=${user?.email}`);
+            return res.data;
+        }
+    });
 
+    const postData = recent.filter(c => c.UserEmail === user?.email);
+    console.log(postData);
+
+
+
+    return (
+
+        <>
+            {postData.length < 5 ?
+
+
+                <div className='w-full max-w-2xl mx-auto my-5 '>
+                    <div className="card bg-base-100 shadow-lg">
+                        <h3 className='text-3xl font-bold text-center py-3'>Add food</h3>
+                        <form onSubmit={handleSubmit(onSubmit)} className=" p-5">
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Author Image</span>
+                                </label>
+                                <input type="url" placeholder="photoUrl" {...register("photoUrl")} className="input input-bordered" required />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Author Name</span>
+                                </label>
+                                <input type="text"{...register("name")} placeholder="password" className="input input-bordered" required />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Author Email</span>
+                                </label>
+                                <input type="email"{...register("Email")} placeholder="password" className="input input-bordered" required />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Post Title</span>
+                                </label>
+                                <input type="text"{...register("Title")} placeholder="password" className="input input-bordered" required />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Post Description</span>
+                                </label>
+                                <textarea
+                                    {...register("Description")} placeholder="Description"
+                                    className="textarea textarea-bordered textarea-lg w-full"></textarea>
+
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Tag </span>
+                                </label>
+                                <select
+                                    {...register("Tag")}
+                                    className="select select-bordered w-full"
+                                    defaultValue={'Tag'}>
+                                    <option disabled value="Tag">Select Your Tag</option>
+                                    <option value="technology">Technology</option>
+                                    <option value="science">Science</option>
+                                    <option value="health">Health</option>
+                                    <option value="education">Education</option>
+                                </select>
+
+                            </div>
+                            <div className="form-control mt-6">
+                                <button className="btn btn-primary">Add post</button>
+                            </div>
+                        </form>
                     </div>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Tag </span>
-                        </label>
-                        <select {...register("Tag")} className="select select-bordered w-full">
-                            <option disabled selected>Who shot first?</option>
-                            <option value={'technology'}>technology</option>
-                            <option value={'science'}>science</option>
-                            <option value={'health'}>health</option>
-                            <option value={'education'}>education</option>
-                        </select>
-                    </div>
-                    <div className="form-control mt-6">
-                        <button className="btn btn-primary">Add post</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+                </div>
+
+                :
+
+                <div className='flex flex-col justify-center items-center min-h-screen'>
+                    <p className='text-2xl text-lime-500'>You have reached the maximum post limit. Become a member to add more posts!</p>
+                    <Link to={'/member'} className='btn btn-primary'>Become a Member</Link>
+                </div>
+            }
+
+
+
+
+
+        </>
+
     );
 };
 

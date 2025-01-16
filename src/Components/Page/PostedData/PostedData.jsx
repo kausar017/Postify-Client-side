@@ -25,18 +25,17 @@ const PostedData = () => {
     });
 
     // Home page data fetching with tanstack query
-    const { isPending, isLoading, error, data: poast = [] } = useQuery({
-        queryKey: ['postedData', sortByPopularity, searchQuery],
+    const { isLoading, error, data: poast = [] } = useQuery({
+        queryKey: ['postedData', searchQuery, sortByPopularity],
         queryFn: async () => {
-            const endpoint = sortByPopularity ? `/posts/popularity?search=${searchQuery}` : `/addpost?search=${searchQuery}`;
+            const endpoint = sortByPopularity
+                ? `/posts/popularity?search=${searchQuery}&sortByPopularity=true`
+                : `/addpost?search=${searchQuery}`;
             const res = await axiosPiblic(endpoint);
             return res.data;
         }
     });
 
-    // if (isLoading) {
-    //     return <Loader></Loader>;
-    // }
 
     if (error) {
         return 'An error has occurred: ' + error.message;
@@ -63,7 +62,7 @@ const PostedData = () => {
                 ) : poast?.length > 0 ? (
                     <div className="w-full max-w-4xl p-5 mx-auto space-y-6">
 
-                        {poast.map((item, index) => {
+                        {poast?.map((item, index) => {
                             const filteredComments = coment.filter(c => c.comentId === item._id);
 
                             return (

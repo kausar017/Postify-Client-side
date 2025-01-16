@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/Logo/Postify logo.png"
 import UseAuth from "../../AuthenTication/UseAuth/UseAuth";
 import toast from "react-hot-toast";
-
+import './Navber.css'
 const Navber = () => {
 
     const { user, handalLogout } = UseAuth()
