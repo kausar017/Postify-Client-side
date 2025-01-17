@@ -1,11 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosPiblic from "../../../AllHooks/useAxiosPiblic";
 import UseAuth from "../../../AuthenTication/UseAuth/UseAuth";
 import Loader from "../../../Page/Loader/Loader";
+import toast from "react-hot-toast";
 
 const MyPost = () => {
     const axiosPiblic = useAxiosPiblic();
     const { user } = UseAuth();
+
+    const queryClient = useQueryClient();
 
     // Fetching user's posts
     const { isLoading, error, data: recent = [] } = useQuery({
@@ -21,13 +24,15 @@ const MyPost = () => {
 
     // Delete post handler
     const handleDelete = async (postId) => {
+
         const confirmDelete = window.confirm("Are you sure you want to delete this post?");
         if (confirmDelete) {
             try {
-                await axiosPiblic.delete(`/addpost/${postId}`);
-                alert("Post deleted successfully!");
+                await axiosPiblic.delete(`/delete/${postId}`);
+                toast.success("Post deleted successfully!");
+                queryClient.invalidateQueries(['recentData', user?.email]);
             } catch (error) {
-                alert("Failed to delete post.");
+                toast.error("Failed to delete post.");
             }
         }
     };
@@ -35,20 +40,21 @@ const MyPost = () => {
     // Comment handler (Redirect or modal)
     const handleComment = (postId) => {
         alert(`Redirecting to comment section for Post ID: ${postId}`);
-        
+
     };
 
     return (
-        <div className="p-5">
+        <div className="p-10">
             <h2 className="text-2xl font-bold mb-4">My Posts</h2>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* Table Head */}
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th></th>
                             <th>Post Title</th>
                             <th>Votes</th>
+                            <th></th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -62,13 +68,14 @@ const MyPost = () => {
                             </tr>
                         ) : postData.length > 0 ? (
                             postData.map((item, index) => (
-                                <tr key={item._id} className="hover">
+                                <tr key={item._id} className="hover w-full overflow-x-scroll">
                                     <td>{index + 1}</td>
-                                    <td>{item.postTitle}</td>
-                                    <td>
-                                        Upvotes: {item.upVote} | Downvotes: {item.downVote}
+                                    <td className="overflow-hidden">{item.postTitle}</td>
+                                    <td className="flex items-center space-x-2">
+                                        <p className="badge badge-primary btn btn-sm"> upVote {item?.upVote}</p>  <p className="badge badge-secondary btn btn-sm"> Downvotes: {item.downVote}</p> 
                                     </td>
-                                    <td>
+                                    <td></td>
+                                    <td className="flex items-center space-x-2">
                                         <button
                                             className="btn btn-primary btn-sm mr-2"
                                             onClick={() => handleComment(item._id)}

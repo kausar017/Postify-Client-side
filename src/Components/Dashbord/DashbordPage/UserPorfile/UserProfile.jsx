@@ -23,7 +23,7 @@ const UserProfile = () => {
     });
 
     const recentPost = recent.filter(c => c.UserEmail === user?.email);
-    console.log(recentPost);
+    // console.log(recentPost);
 
     // Comments data fetch with tanstack query
     const { data: coment = [] } = useQuery({
@@ -34,11 +34,22 @@ const UserProfile = () => {
         }
     });
 
+    const { data: userData } = useQuery({
+        queryKey: ['bage'],
+        queryFn: async () => {
+            const res = await axiosPiblic.get('/users')
+            return res.data;
+        }
+    })
+
+    console.log(userData);
+
+
 
     return (
         <>
             <div className='bg-gray-100 py-10'>
-               
+
                 <div className="flex flex-col justify-center items-center min-h-screen ">
                     <div className="card w-96 bg-white shadow-lg border border-gray-200 rounded-lg">
 
@@ -54,14 +65,27 @@ const UserProfile = () => {
 
 
                             <div className="flex justify-center gap-4">
-                                <button className="flex items-center border-2 w-32 h-16 justify-center bg-[#d6985a] rounded-lg">
-                                    <img className='w-11' src="https://i.postimg.cc/q7pwZqzh/coin.png" alt="" />
-                                    <div className="text-lg font-bold text-white">Bronze</div>
-                                </button>
-                                <button className="flex items-center border-2 w-32 h-16 justify-center bg-[#ebda7c] rounded-lg">
-                                    <img className='w-11' src="https://i.postimg.cc/yWq2bRg4/trophy.png" alt="" />
-                                    <div className="text-lg font-bold text-orange-800">Gold </div>
-                                </button>
+
+                                {userData && Array.isArray(userData) && userData.map((user, i) => {
+                                    console.log(user?.bage); 
+
+                                    return (
+                                        <div key={i}>
+                                            {user?.bage === "Bronze" && (
+                                                <button className="flex items-center border-2 w-32 h-16 justify-center bg-[#d6985a] rounded-lg">
+                                                    <img className="w-11" src="https://i.postimg.cc/q7pwZqzh/coin.png" alt="" />
+                                                    <div className="text-lg font-bold text-white">Bronze</div>
+                                                </button>
+                                            )}
+                                            {user?.bage === "Gold" && (
+                                                <button className="flex items-center border-2 w-32 h-16 justify-center bg-[#ebda7c] rounded-lg">
+                                                    <img className="w-11" src="https://i.postimg.cc/yWq2bRg4/trophy.png" alt="" />
+                                                    <div className="text-lg font-bold text-orange-800">Gold</div>
+                                                </button>
+                                            )}
+                                        </div>
+                                    );
+                                })}
 
                             </div>
                         </div>

@@ -47,13 +47,24 @@ const PostedData = () => {
             <Bannar searchQuery={searchQuery} setSearchQuery={setSearchQuery}></Bannar>
 
             <div className='bg-gray-200 min-h-screen'>
-                <div className='w-full max-w-4xl p-2 mx-auto'>
+                <div className='w-full flex flex-wrap items-center space-x-3 max-w-4xl p-2 mx-auto'>
                     <button
                         onClick={() => setSortByPopularity(!sortByPopularity)}
-                        className="btn btn-primary "
-                    >
+                        className="btn btn-primary ">
                         {sortByPopularity ? 'Sort by Newest' : 'Sort by Popularity'}
                     </button>
+                    <div>
+                        {
+                            poast?.map(item =>
+
+                                <button className="btn btn-sm">
+
+                                    <div className="badge badge-secondary">{item?.tag}</div>
+                                </button>
+
+                            )
+                        }
+                    </div>
                 </div>
                 {isLoading ? (
                     <div className="text-center my-10">

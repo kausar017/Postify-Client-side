@@ -3,24 +3,38 @@ import { IoLogoGoogle } from "react-icons/io5";
 import { useLocation, useNavigate } from "react-router-dom";
 import UseAuth from "../UseAuth/UseAuth";
 import toast from "react-hot-toast";
+import useAxiosPiblic from "../../AllHooks/useAxiosPiblic";
 
 const SosalLogin = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
+    const axiosPiblic = useAxiosPiblic()
+    const { handaleGoogle, user } = UseAuth()
 
-    const { handaleGoogle } = UseAuth()
+    console.log(user);
+
 
     const handaleGoogleLogin = async (e) => {
-        e.preventDefault()
-        // console.log('hello');
-        try {
-            await handaleGoogle()
-            toast.success('Google Login success')
-            navigate(from, { replace: true });
-        } catch (error) {
-            toast.error('Login Faield', error)
-        }
+
+        handaleGoogle()
+            .then((result) => {
+
+                console.log(result.user);
+                const userData = {
+                    bage: 'Bronze',
+                    email: result.user?.email
+                }
+                // console.log();
+
+                axiosPiblic.post(`/users/${result.user.email}`, userData)
+                    .then((result) => {
+                        navigate(from, { replace: true })
+                        toast.success('Register Success')
+                        // console.log(result.user);
+                    })
+            });
+
     }
     return (
         <div>

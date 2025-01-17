@@ -9,6 +9,7 @@ import UseAuth from "../UseAuth/UseAuth";
 import { useState } from "react";
 import singupLottie from "../../../assets/Lottify/singup.json"
 import toast from "react-hot-toast";
+import useAxiosPiblic from "../../AllHooks/useAxiosPiblic";
 
 const SignUp = () => {
 
@@ -16,6 +17,7 @@ const SignUp = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
+    const axiosPiblic = useAxiosPiblic()
 
     const { handaleRegister, manageUsr } = UseAuth()
 
@@ -37,9 +39,21 @@ const SignUp = () => {
             toast.success('Signup Succesfuly', {
                 duration: 3000, position: "top-right"
             });
-
             reset()
+
+
+            const info = {
+                Badge: 'Bronze',
+                email: user?.email
+            }
+            try {
+
+                await axiosPiblic.post(`/Badge`, info);
+            } catch (errors) {
+                console.log("coment not added");
+            }
             navigate(from, { replace: true });
+
         }
         catch (error) {
             console.error('Signup error:', error);
