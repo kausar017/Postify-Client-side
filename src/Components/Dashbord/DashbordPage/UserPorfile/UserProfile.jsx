@@ -5,6 +5,7 @@ import useAxiosPiblic from '../../../AllHooks/useAxiosPiblic';
 import { FaDatabase } from 'react-icons/fa6';
 import Loader from '../../../Page/Loader/Loader';
 import { format } from 'date-fns';
+import DynamicTitle from '../../../Shared/DynamicTitle/DynamicTitle';
 
 const UserProfile = () => {
 
@@ -48,9 +49,10 @@ const UserProfile = () => {
 
     return (
         <>
-            <div className='bg-gray-100 py-10'>
 
-                <div className="flex flex-col justify-center items-center min-h-screen ">
+            <div className='bg-gray-100 py-10'>
+                <DynamicTitle title='My Profile'></DynamicTitle>
+                <div className="flex flex-col justify-center items-center">
                     <div className="card w-96 bg-white shadow-lg border border-gray-200 rounded-lg">
 
                         <div className="card-body items-center text-center">
@@ -67,7 +69,7 @@ const UserProfile = () => {
                             <div className="flex justify-center gap-4">
 
                                 {userData && Array.isArray(userData) && userData.map((user, i) => {
-                                    console.log(user?.bage); 
+                                    console.log(user?.bage);
 
                                     return (
                                         <div key={i}>
@@ -116,14 +118,14 @@ const UserProfile = () => {
                         //     "userPhoto": "https://lh3.googleusercontent.com/a/ACg8ocJBAjHsJzAHA_n9p6jMCUkEiahSCGKLpp5SztPj_R-WHOuS8uPabA=s96-c"
                         // }
 
-                        <div>
+                        <div className='min-h-[500px]'>
                             {
                                 recentPost?.length > 0 ?
 
                                     recentPost.slice(0, 3).map((item, index) => {
                                         const filteredComments = coment.filter(c => c.comentId === item._id);
                                         return < div key={index} className='my-5 border shadow-lg'>
-                                            <div className="hero bg-base-100 ">
+                                            <div className="">
                                                 <div className="hero-content flex-col lg:flex-row">
                                                     <img
                                                         src={item?.image}

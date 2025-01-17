@@ -3,6 +3,8 @@ import useAxiosPiblic from "../../../AllHooks/useAxiosPiblic";
 import UseAuth from "../../../AuthenTication/UseAuth/UseAuth";
 import Loader from "../../../Page/Loader/Loader";
 import toast from "react-hot-toast";
+import DynamicTitle from "../../../Shared/DynamicTitle/DynamicTitle";
+import { Link } from "react-router-dom";
 
 const MyPost = () => {
     const axiosPiblic = useAxiosPiblic();
@@ -38,14 +40,14 @@ const MyPost = () => {
     };
 
     // Comment handler (Redirect or modal)
-    const handleComment = (postId) => {
-        alert(`Redirecting to comment section for Post ID: ${postId}`);
+    // const handleComment = (postId) => {
+    //     alert(`Redirecting to comment section for Post ID: ${postId}`);
 
-    };
+    // };
 
     return (
         <div className="p-10">
-            <h2 className="text-2xl font-bold mb-4">My Posts</h2>
+            <DynamicTitle title="My Posts"></DynamicTitle>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* Table Head */}
@@ -72,16 +74,16 @@ const MyPost = () => {
                                     <td>{index + 1}</td>
                                     <td className="overflow-hidden">{item.postTitle}</td>
                                     <td className="flex items-center space-x-2">
-                                        <p className="badge badge-primary btn btn-sm"> upVote {item?.upVote}</p>  <p className="badge badge-secondary btn btn-sm"> Downvotes: {item.downVote}</p> 
+                                        <p className="badge badge-primary btn btn-sm"> upVote {item?.upVote}</p>  <p className="badge badge-secondary btn btn-sm"> Downvotes: {item.downVote}</p>
                                     </td>
                                     <td></td>
                                     <td className="flex items-center space-x-2">
-                                        <button
+                                        <Link
                                             className="btn btn-primary btn-sm mr-2"
-                                            onClick={() => handleComment(item._id)}
+                                            to={`/dasbord/comment/${item._id}`}
                                         >
                                             Comment
-                                        </button>
+                                        </Link>
                                         <button
                                             className="btn btn-error btn-sm"
                                             onClick={() => handleDelete(item._id)}

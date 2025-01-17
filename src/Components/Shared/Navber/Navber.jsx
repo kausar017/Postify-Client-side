@@ -8,8 +8,8 @@ const Navber = () => {
     const { user, handalLogout } = UseAuth()
 
     const link = <>
-        <NavLink to={'/'}><button className="btn btn-ghost btn-sm md:text-white">Home</button></NavLink>
-        <NavLink to={'/member'}><button className="btn btn-ghost btn-sm md:text-white">Membership</button></NavLink>
+        <NavLink to={'/'}><button className="btn btn-ghost btn-sm">Home</button></NavLink>
+        <NavLink to={'/member'}><button className="btn btn-ghost btn-sm ">Membership</button></NavLink>
     </>
 
     const logout = async () => {

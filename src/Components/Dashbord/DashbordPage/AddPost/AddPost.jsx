@@ -5,6 +5,7 @@ import useAxiosPiblic from '../../../AllHooks/useAxiosPiblic';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import DynamicTitle from '../../../Shared/DynamicTitle/DynamicTitle';
 
 const AddPost = () => {
 
@@ -71,12 +72,14 @@ const AddPost = () => {
     return (
 
         <>
+        <DynamicTitle title='Add food'></DynamicTitle>
+
             {postData.length < 5 ?
 
 
                 <div className='w-full max-w-2xl mx-auto my-5 '>
                     <div className="card bg-base-100 shadow-lg">
-                        <h3 className='text-3xl font-bold text-center py-3'>Add food</h3>
+                       
                         <form onSubmit={handleSubmit(onSubmit)} className=" p-5">
                             <div className="form-control">
                                 <label className="label">

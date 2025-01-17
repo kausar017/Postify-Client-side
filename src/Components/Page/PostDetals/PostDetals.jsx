@@ -89,7 +89,7 @@ const PostDetals = () => {
     };
 
 
-    const shareUrl = "https://kausarmiaportfolio.netlify.app";
+    const shareUrl = `${window.location.origin}/${_id}`
     const title = "Check this awesome website!";
 
     return (

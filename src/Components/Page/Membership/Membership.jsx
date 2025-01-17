@@ -1,9 +1,15 @@
+import DynamicTitle from "../../Shared/DynamicTitle/DynamicTitle";
 
 const Membership = () => {
     return (
-        <div>
-            hello Membership 
-        </div>
+        <>
+
+            <DynamicTitle title="Membership"></DynamicTitle>
+
+            <div>
+                hello Membership
+            </div>
+        </>
     );
 };
 
