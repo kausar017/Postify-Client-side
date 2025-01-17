@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import UseAuth from '../../../AuthenTication/UseAuth/UseAuth';
 import useAxiosPiblic from '../../../AllHooks/useAxiosPiblic';
@@ -6,12 +6,14 @@ import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import DynamicTitle from '../../../Shared/DynamicTitle/DynamicTitle';
+import Loader from '../../../Page/Loader/Loader';
 
 const AddPost = () => {
 
     const { user } = UseAuth()
 
     const axiosPiblic = useAxiosPiblic()
+    const [allData, setAllData] = useState()
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -67,19 +69,32 @@ const AddPost = () => {
     const postData = recent.filter(c => c.UserEmail === user?.email);
     console.log(postData);
 
+    const { data: userData, isLoading: loader } = useQuery({
+        queryKey: ['bage'],
+        queryFn: async () => {
+            const res = await axiosPiblic.get('/users')
+            return res.data;
+        }
+    })
+    if (loader || isLoading) {
+        return <Loader></Loader>
+    }
+    console.log(userData[0].bage);
 
-
+    // if (userData[0].bage == 'Bronz' || postData.length < 5) {
+    //     setAllData()
+    // }
     return (
 
         <>
-        <DynamicTitle title='Add food'></DynamicTitle>
+            <DynamicTitle title='Add food'></DynamicTitle>
 
-            {postData.length < 5 ?
+            {userData[0].bage == 'Gold' || postData.length < 5 ?
 
 
                 <div className='w-full max-w-2xl mx-auto my-5 '>
                     <div className="card bg-base-100 shadow-lg">
-                       
+
                         <form onSubmit={handleSubmit(onSubmit)} className=" p-5">
                             <div className="form-control">
                                 <label className="label">
@@ -144,10 +159,6 @@ const AddPost = () => {
                     <Link to={'/member'} className='btn btn-primary'>Become a Member</Link>
                 </div>
             }
-
-
-
-
 
         </>
 

@@ -10,7 +10,7 @@ import DynamicTitle from '../../../Shared/DynamicTitle/DynamicTitle';
 const UserProfile = () => {
 
     const axiosPiblic = useAxiosPiblic()
-
+      const[]=useRole  
     const { user } = UseAuth()
     // console.log(user.email);
 
@@ -27,14 +27,14 @@ const UserProfile = () => {
     // console.log(recentPost);
 
     // Comments data fetch with tanstack query
-    const { data: coment = [] } = useQuery({
+    const { data: coment = [], isLoading: lodaer } = useQuery({
         queryKey: ['queary'],
         queryFn: async () => {
             const res = await axiosPiblic('/coment');
             return res.data;
         }
     });
-
+   
     const { data: userData } = useQuery({
         queryKey: ['bage'],
         queryFn: async () => {
