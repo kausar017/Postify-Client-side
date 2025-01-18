@@ -81,9 +81,6 @@ const AddPost = () => {
     }
     console.log(userData[0].bage);
 
-    // if (userData[0].bage == 'Bronz' || postData.length < 5) {
-    //     setAllData()
-    // }
     return (
 
         <>

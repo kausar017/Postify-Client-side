@@ -10,7 +10,7 @@ import DynamicTitle from '../../../Shared/DynamicTitle/DynamicTitle';
 const UserProfile = () => {
 
     const axiosPiblic = useAxiosPiblic()
-      const[]=useRole  
+    //   const[]=useRole  
     const { user } = UseAuth()
     // console.log(user.email);
 
