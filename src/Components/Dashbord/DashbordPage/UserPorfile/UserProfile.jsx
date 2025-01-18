@@ -34,8 +34,8 @@ const UserProfile = () => {
             return res.data;
         }
     });
-   
-    const { data: userData } = useQuery({
+
+    const { data: userData = [], isLoading: loader } = useQuery({
         queryKey: ['bage'],
         queryFn: async () => {
             const res = await axiosPiblic.get('/users')
@@ -43,8 +43,12 @@ const UserProfile = () => {
         }
     })
 
-    console.log(userData);
+    if (isLoading || loader) {
+        return <p>loding.....</p>
+    }
 
+    console.log(userData);
+    const bageData = userData.filter(c => c.email === user?.email);
 
 
     return (
@@ -68,7 +72,7 @@ const UserProfile = () => {
 
                             <div className="flex justify-center gap-4">
 
-                                {userData && Array.isArray(userData) && userData.map((user, i) => {
+                                {bageData && Array.isArray(bageData) && bageData.map((user, i) => {
                                     console.log(user?.bage);
 
                                     return (

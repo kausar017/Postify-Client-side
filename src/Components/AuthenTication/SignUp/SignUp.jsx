@@ -40,24 +40,20 @@ const SignUp = () => {
                 duration: 3000, position: "top-right"
             });
             reset()
-
-
-            const info = {
-                Badge: 'Bronze',
-                email: user?.email
-            }
-            try {
-
-                await axiosPiblic.post(`/Badge`, info);
-            } catch (errors) {
-                console.log("coment not added");
-            }
             navigate(from, { replace: true });
+
+            const userData = {
+                bage: 'Bronze',
+                email: data.email,
+            };
+
+            // Send data to the server
+            await axiosPiblic.post(`/users/${data?.email}`, userData);
 
         }
         catch (error) {
             console.error('Signup error:', error);
-            toast.success('Signup Failed', {
+            toast.error('Signup Failed', {
                 duration: 3000, position: "top-right"
             });
         }

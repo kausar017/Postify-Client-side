@@ -67,7 +67,7 @@ const AddPost = () => {
     });
 
     const postData = recent.filter(c => c.UserEmail === user?.email);
-    console.log(postData);
+    console.log(postData[0]?.UserEmail);
 
     const { data: userData, isLoading: loader } = useQuery({
         queryKey: ['bage'],
@@ -79,14 +79,14 @@ const AddPost = () => {
     if (loader || isLoading) {
         return <Loader></Loader>
     }
-    console.log(userData[0].bage);
-
+    const bageData = userData.filter(c => c.email === user?.email);
+    console.log(bageData[0]?.bage);
     return (
 
         <>
             <DynamicTitle title='Add food'></DynamicTitle>
 
-            {userData[0].bage == 'Gold' || postData.length < 5 ?
+            {bageData[0]?.bage == 'Gold' ||  postData?.length < 5 ?
 
 
                 <div className='w-full max-w-2xl mx-auto my-5 '>

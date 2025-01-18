@@ -23,6 +23,7 @@ const MyPost = () => {
     });
 
     const postData = recent.filter(c => c.UserEmail === user?.email);
+    // console.log(postData?._id);
 
     // Delete post handler
     const handleDelete = async (postId) => {
@@ -39,11 +40,21 @@ const MyPost = () => {
         }
     };
 
-    // Comment handler (Redirect or modal)
-    // const handleComment = (postId) => {
-    //     alert(`Redirecting to comment section for Post ID: ${postId}`);
+    // Comments data fetch with tanstack query
+    const { data: coment = [] } = useQuery({
+        queryKey: ['queary'],
+        queryFn: async () => {
+            const res = await axiosPiblic('/coment');
+            return res.data;
+        }
+    });
+    console.log(coment);
 
-    // };
+    // const filteredComments = coment.filter(c => c.comentId === item?._id);
+
+
+
+
 
     return (
         <div className="p-10">
@@ -69,30 +80,41 @@ const MyPost = () => {
                                 </td>
                             </tr>
                         ) : postData.length > 0 ? (
-                            postData.map((item, index) => (
-                                <tr key={item._id} className="hover w-full overflow-x-scroll">
-                                    <td>{index + 1}</td>
-                                    <td className="overflow-hidden">{item.postTitle}</td>
-                                    <td className="flex items-center space-x-2">
-                                        <p className="badge badge-primary btn btn-sm"> upVote {item?.upVote}</p>  <p className="badge badge-secondary btn btn-sm"> Downvotes: {item.downVote}</p>
-                                    </td>
-                                    <td></td>
-                                    <td className="flex items-center space-x-2">
-                                        <Link
-                                            className="btn btn-primary btn-sm mr-2"
-                                            to={`/dasbord/comment/${item._id}`}
-                                        >
-                                            Comment
-                                        </Link>
-                                        <button
-                                            className="btn btn-error btn-sm"
-                                            onClick={() => handleDelete(item._id)}
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))
+                            postData.map((item, index) => {
+                                // Filter comments for this post
+                                const filteredComments = coment.filter((comment) => comment.comentId === item._id);
+
+                                // Pass filtered comments via Link
+                                return (
+                                    <tr key={item._id} className="hover w-full overflow-x-scroll">
+                                        <td>{index + 1}</td>
+                                        <td className="overflow-hidden">{item.postTitle}</td>
+                                        <td className="flex items-center space-x-2">
+                                            <p className="badge badge-primary btn btn-sm"> upVote {item?.upVote}</p>
+                                            <p className="badge badge-secondary btn btn-sm"> Downvotes: {item.downVote}</p>
+                                        </td>
+                                        <td></td>
+                                        <td className="flex items-center space-x-2">
+                                            <Link
+                                                className="btn btn-primary btn-sm mr-2"
+                                                to={{
+                                                    pathname: `/dasbord/comment/${item._id}`,
+                                                    state: { comments: filteredComments }, 
+                                                }}
+                                            >
+                                                Comment
+                                            </Link>
+                                            <button
+                                                className="btn btn-error btn-sm"
+                                                onClick={() => handleDelete(item._id)}
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                );
+                            })
+
                         ) : (
                             <tr>
                                 <td colSpan="4" className="text-center text-red-500">

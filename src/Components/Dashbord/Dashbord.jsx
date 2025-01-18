@@ -9,7 +9,7 @@ import { IoHome } from "react-icons/io5";
 
 const Dashbord = () => {
 
-    const isAdmin = false
+    const isAdmin = true
 
     return (
         <div className="">

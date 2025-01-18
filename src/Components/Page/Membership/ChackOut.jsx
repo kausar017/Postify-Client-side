@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import useAxiosPiblic from '../../AllHooks/useAxiosPiblic';
 import { useQuery } from '@tanstack/react-query';
+import UseAuth from '../../AuthenTication/UseAuth/UseAuth';
 
 const ChackOut = () => {
     const stripe = useStripe();
@@ -12,6 +13,7 @@ const ChackOut = () => {
     const [clientSecret, setClientSecret] = useState('');
     const axiosPiblic = useAxiosPiblic();
 
+    const { user } = UseAuth()
 
     const card = [
         { price: 50 },
@@ -29,8 +31,8 @@ const ChackOut = () => {
         }
     })
 
-
-    // console.log(userData[0]?._id);
+    const bageData = userData.filter(c => c?.email === user?.email);
+    console.log(bageData[0]?.email);
 
 
 
@@ -49,7 +51,7 @@ const ChackOut = () => {
         event.preventDefault();
 
         try {
-            await axiosPiblic.put(`/users/${userData[0]?._id}`, {
+            await axiosPiblic.put(`/users/${bageData[0]?.email}`, {
                 bage: 'Gold',
             });
         } catch (error) {

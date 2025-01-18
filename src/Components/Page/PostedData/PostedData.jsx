@@ -31,7 +31,7 @@ const PostedData = () => {
             const endpoint = sortByPopularity
                 ? `/posts/popularity?search=${searchQuery}&sortByPopularity=true`
                 : `/addpost?search=${searchQuery}`;
-            const res = await axiosPiblic(endpoint);
+            const res = await axiosPiblic.get(endpoint);
             return res.data;
         }
     });

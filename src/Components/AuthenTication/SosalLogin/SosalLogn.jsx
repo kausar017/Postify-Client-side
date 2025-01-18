@@ -19,15 +19,15 @@ const SosalLogin = () => {
 
         handaleGoogle()
             .then((result) => {
-
                 console.log(result.user);
+                
                 const userData = {
                     bage: 'Bronze',
                     email: result.user?.email
                 }
                 // console.log();
 
-                axiosPiblic.post(`/users/${result.user.email}`, userData)
+                axiosPiblic.post(`/users/${result.user?.email}`, userData)
                     .then((result) => {
                         navigate(from, { replace: true })
                         toast.success('Register Success')

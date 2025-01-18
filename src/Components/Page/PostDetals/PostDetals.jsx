@@ -30,6 +30,7 @@ const PostDetals = () => {
         // console.log(data);
         const info = {
             comentId: _id,
+            email: authorEmail,
             ...data
         }
 
@@ -49,11 +50,14 @@ const PostDetals = () => {
         queryKey: ['detals'],
         queryFn: async () => {
             const res = await axiosPiblic(`/addpost/${id}`)
-            return res;
+            return res.data;
         }
     })
 
-    const { authorEmail, image, authorName, postTitle, postDescription, tag, carentTime, _id } = detals?.data || {}
+    console.log(detals);
+
+
+    const { authorEmail, image, authorName, postTitle, postDescription, tag, carentTime, _id } = detals || {}
 
     if (isLoading) {
         return <Loader></Loader>
@@ -88,7 +92,7 @@ const PostDetals = () => {
         }
     };
 
-
+    
     const shareUrl = `${window.location.origin}/${_id}`
     const title = "Check this awesome website!";
 
