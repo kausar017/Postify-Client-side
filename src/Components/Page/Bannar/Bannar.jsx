@@ -14,7 +14,7 @@ const Bannar = ({ searchQuery, setSearchQuery }) => {
     const handleSearch = (e) => {
         // Prevent form submission or any default behavior
         e.preventDefault();
-        setSearchQuery(e.target.value); // Update the search query state
+        setSearchQuery(e.target.value); 
     };
 
     return (

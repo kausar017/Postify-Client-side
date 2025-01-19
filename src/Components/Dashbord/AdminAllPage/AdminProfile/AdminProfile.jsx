@@ -52,7 +52,7 @@ const AdminProfile = () => {
     const { data: posts = [], isLoading: postsLoading } = useQuery({
         queryKey: ['post'],
         queryFn: async () => {
-            const res = await axiosPublic.get('/addpost');
+            const res = await axiosPublic.get('/adminProfile');
             return res.data;
         }
     });

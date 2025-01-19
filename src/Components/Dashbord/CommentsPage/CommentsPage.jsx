@@ -48,6 +48,8 @@ const CommentsPage = () => {
 
     const handleReport = async (id) => {
         const feedback = selectedFeedback[id];
+        console.log(feed);
+        
         if (!feedback) {
             toast.error("Please select feedback before reporting!");
             return;
