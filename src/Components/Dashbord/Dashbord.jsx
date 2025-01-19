@@ -15,7 +15,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const Dashbord = () => {
     const axiosPiblic = useAxiosPiblic()
-    const isAdmin = true
+    const isAdmin = false
 
     const { data: announcements = [], refetch } = useQuery({
         queryKey: ['announcements'],
