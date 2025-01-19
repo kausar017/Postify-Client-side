@@ -19,6 +19,16 @@ const AddPost = () => {
     const location = useLocation()
     const from = location.state?.from?.pathname || '/dasbord/myPost';
 
+    const { data: tags = [] } = useQuery({
+        queryKey: ['tags'],
+        queryFn: async () => {
+            const res = await axiosPiblic.get('/tags')
+            return res.data;
+        }
+    })
+    // console.log(tags);
+
+
     const {
         register,
         handleSubmit,
@@ -27,7 +37,7 @@ const AddPost = () => {
     } = useForm()
 
     const onSubmit = async (data) => {
-        // console.log(data)
+        console.log(data)
 
         const userInfo = {
             image: data.photoUrl,
@@ -67,7 +77,7 @@ const AddPost = () => {
     });
 
     const postData = recent.filter(c => c.UserEmail === user?.email);
-    console.log(postData[0]?.UserEmail);
+    // console.log(postData[0]?.UserEmail);
 
     const { data: userData, isLoading: loader } = useQuery({
         queryKey: ['bage'],
@@ -80,13 +90,13 @@ const AddPost = () => {
         return <Loader></Loader>
     }
     const bageData = userData.filter(c => c.email === user?.email);
-    console.log(bageData[0]?.bage);
+    // console.log(bageData[0]?.bage);
     return (
 
         <>
             <DynamicTitle title='Add food'></DynamicTitle>
 
-            {bageData[0]?.bage == 'Gold' ||  postData?.length < 5 ?
+            {bageData[0]?.bage == 'Gold' || postData?.length < 5 ?
 
 
                 <div className='w-full max-w-2xl mx-auto my-5 '>
@@ -133,13 +143,15 @@ const AddPost = () => {
                                 <select
                                     {...register("Tag")}
                                     className="select select-bordered w-full"
-                                    defaultValue={'Tag'}>
+                                    defaultValue="Tag">
                                     <option disabled value="Tag">Select Your Tag</option>
-                                    <option value="technology">Technology</option>
-                                    <option value="science">Science</option>
-                                    <option value="health">Health</option>
-                                    <option value="education">Education</option>
+                                    {tags.map((tag, index) => (
+                                        <option className='text-black' key={index} value={tag.tages}>
+                                            {tag.tages}
+                                        </option>
+                                    ))}
                                 </select>
+
 
                             </div>
                             <div className="form-control mt-6">

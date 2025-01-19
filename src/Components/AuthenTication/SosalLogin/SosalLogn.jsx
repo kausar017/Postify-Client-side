@@ -19,11 +19,12 @@ const SosalLogin = () => {
 
         handaleGoogle()
             .then((result) => {
-                console.log(result.user);
-                
+                console.log(result.user?.displayName);
+
                 const userData = {
                     bage: 'Bronze',
-                    email: result.user?.email
+                    email: result.user?.email,
+                    name: result.user?.displayName
                 }
                 // console.log();
 

@@ -44,7 +44,7 @@ const UserProfile = () => {
     })
 
     if (isLoading || loader) {
-        return <p>loding.....</p>
+        return <Loader></Loader>
     }
 
     console.log(userData);

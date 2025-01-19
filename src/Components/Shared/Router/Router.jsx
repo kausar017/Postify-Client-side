@@ -14,6 +14,11 @@ import Membership from "../../Page/Membership/Membership";
 import UserProfile from "../../Dashbord/DashbordPage/UserPorfile/userProfile";
 import MyPost from "../../Dashbord/DashbordPage/MyPost/MyPost";
 import CommentsPage from "../../Dashbord/CommentsPage/CommentsPage";
+import AdminProfile from "../../Dashbord/AdminAllPage/AdminProfile/AdminProfile";
+import ManageUser from "../../Dashbord/AdminAllPage/ManageUser/ManageUser";
+import Reported from "../../Dashbord/AdminAllPage/ReportedComments/Reported";
+import Announcement from "../../Dashbord/AdminAllPage/Announcement/Announcement";
+import UserAnnounce from "../../Dashbord/DashbordPage/userAnnounce/UserAnnounce";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -22,7 +27,7 @@ const Router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home></Home>
+        element: <Home></Home>,
       },
       {
         path: '/detals/:id',
@@ -78,7 +83,29 @@ const Router = createBrowserRouter([
           <CommentsPage></CommentsPage>
         </PrivetRout>
       },
+      {
+        path: '/dasbord/Announce',
+        element: <PrivetRout>
+          <UserAnnounce></UserAnnounce>
+        </PrivetRout>
+      },
       // admin route
+      {
+        path: '/dasbord/adminProfile',
+        element: <PrivetRout><AdminProfile></AdminProfile></PrivetRout>
+      },
+      {
+        path: '/dasbord/managUser',
+        element: <PrivetRout><ManageUser></ManageUser></PrivetRout>
+      },
+      {
+        path: '/dasbord/reportComents',
+        element: <PrivetRout><Reported></Reported></PrivetRout>
+      },
+      {
+        path: '/dasbord/Announcement',
+        element: <PrivetRout><Announcement></Announcement></PrivetRout>
+      },
     ]
   }
 ]);

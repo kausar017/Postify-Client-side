@@ -45,6 +45,7 @@ const SignUp = () => {
             const userData = {
                 bage: 'Bronze',
                 email: data.email,
+                name:data.name
             };
 
             // Send data to the server

@@ -6,11 +6,26 @@ import { CgProfile } from "react-icons/cg";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { FaSignsPost } from "react-icons/fa6";
 import { IoHome } from "react-icons/io5";
+import { GrUserAdmin } from "react-icons/gr";
+import { MdManageAccounts } from "react-icons/md";
+import { VscReport } from "react-icons/vsc";
+import { TfiAnnouncement } from "react-icons/tfi";
+import useAxiosPiblic from "../AllHooks/useAxiosPiblic";
+import { useQuery } from "@tanstack/react-query";
 
 const Dashbord = () => {
-
+    const axiosPiblic = useAxiosPiblic()
     const isAdmin = true
 
+    const { data: announcements = [], refetch } = useQuery({
+        queryKey: ['announcements'],
+        queryFn: async () => {
+            const res = await axiosPiblic.get('/announcement')
+            refetch()
+            return res.data;
+        }
+    })
+    // console.log(announcements);
     return (
         <div className="">
             <Helmet>
@@ -23,15 +38,16 @@ const Dashbord = () => {
                 {isAdmin ?
 
                     <>
-                        <div className="bg-primary/30 col-span-2 space-y-3 xl:block lg:block md:hidden max-sm:hidden pt-3">
+                        <div className="bg-primary/30 xl:col-span-2 lg:col-span-3 space-y-3 xl:block lg:block md:hidden max-sm:hidden pt-3">
                             <div className="flex flex-col ml-2 space-y-2">
                                 <div className=""><img className="w-full max-w-[100px]" src={logo} alt={logo} /></div>
-                                <NavLink to={'/dasbord/adminHome'}><button className="btn btn-ghost btn-sm uppercase">Admin Home </button></NavLink>
-                                <NavLink to={'/dasbord/additem'}><button className="btn btn-ghost btn-sm uppercase"> Add Items</button></NavLink>
-                                <NavLink to={'/dasbord/manageItems'}><button className="btn btn-ghost btn-sm uppercase "> manage items </button></NavLink>
-                                <NavLink to={'/dasbord/boking'}><button className="btn btn-ghost btn-sm uppercase"> Manage bookings </button></NavLink>
-                                <NavLink to={'/dasbord/users'}><button className="btn btn-ghost btn-sm uppercase ">all users </button></NavLink>
+                                <NavLink to={'/dasbord/adminProfile'}><button className="btn btn-ghost btn-sm uppercase"><GrUserAdmin size={20}></GrUserAdmin> Admin Profile</button></NavLink>
+                                <NavLink to={'/dasbord/managUser'}><button className="btn btn-ghost btn-sm uppercase"><MdManageAccounts size={20}></MdManageAccounts> Manage Users</button></NavLink>
+                                <NavLink to={'/dasbord/reportComents'}><button className="btn btn-ghost btn-sm uppercase "><VscReport size={20}></VscReport> Reported Comments </button></NavLink>
+                                <NavLink to={'/dasbord/Announcement'}><button className="btn btn-ghost btn-sm uppercase"><TfiAnnouncement size={20}></TfiAnnouncement> Make Announcement</button></NavLink>
                             </div>
+                            <div className="divider"></div>
+                            <NavLink to={'/'}><button className="btn btn-ghost btn-sm uppercase"><IoHome size={20}></IoHome>Home</button></NavLink>
                         </div>
                     </>
                     :
@@ -44,16 +60,27 @@ const Dashbord = () => {
                                 <NavLink to={'/dasbord/myPost'}><button className="btn btn-ghost btn-sm uppercase"><FaSignsPost size={20}></FaSignsPost>My Posts </button></NavLink>
                             </div>
                             <div className="divider"></div>
-                            <NavLink to={'/'}><button className="btn btn-ghost btn-sm uppercase"><IoHome size={20}></IoHome>Home</button></NavLink>
+                            <div className="flex flex-col space-y-1">
+                                <NavLink to={'/'}><button className="btn btn-ghost btn-sm uppercase"><IoHome size={20}></IoHome>Home</button></NavLink>
+                                <div>
+                                    {
+                                        announcements.length === 0 ?
+
+
+                                            ""
+
+                                            :
+                                            <NavLink to={'/dasbord/Announce'}><button className="btn btn-ghost btn-sm uppercase animate-bounce"><TfiAnnouncement size={20}></TfiAnnouncement>Announcement <span className="badge badge-sm indicator-item ">{announcements?.length}</span></button></NavLink>
+                                    }
+
+                                </div>
+                            </div>
                         </div>
                     </>
                 }
 
 
-
-
-
-                <div className="drawer xl:hidden col-span-1 z-10  lg:hidden md:block">
+                <div className="drawer xl:hidden  col-span-1 z-10  lg:hidden md:block">
                     <input id="my-drawer" type="checkbox" className="drawer-toggle" />
                     <div className="drawer-content">
                         {/* Page content here */}
@@ -67,11 +94,13 @@ const Dashbord = () => {
 
                             {isAdmin ?
                                 <div className="flex flex-col px-2 space-y-2">
-                                    <NavLink to={'/dasbord/adminHome'}><button className="btn btn-ghost btn-sm uppercase">Admin Home </button></NavLink>
-                                    <NavLink to={'/dasbord/additem'}><button className="btn btn-ghost btn-sm uppercase"> Add Items</button></NavLink>
-                                    <NavLink to={'/dasbord/manageItems'}><button className="btn btn-ghost btn-sm uppercase "> manage items </button></NavLink>
-                                    <NavLink to={'/dasbord/boking'}><button className="btn btn-ghost btn-sm uppercase"> Manage bookings </button></NavLink>
-                                    <NavLink to={'/dasbord/users'}><button className="btn btn-ghost btn-sm uppercase ">all users </button></NavLink>
+                                    <div className=""><img className="w-full max-w-[100px]" src={logo} alt={logo} /></div>
+                                    <NavLink to={'/dasbord/adminProfile'}><button className="btn btn-ghost btn-sm uppercase"><GrUserAdmin size={20}></GrUserAdmin> Admin Profile</button></NavLink>
+                                    <NavLink to={'/dasbord/managUser'}><button className="btn btn-ghost btn-sm uppercase"><MdManageAccounts size={20}></MdManageAccounts> Manage Users</button></NavLink>
+                                    <NavLink to={'/dasbord/reportComents'}><button className="btn btn-ghost btn-sm uppercase "><VscReport size={20}></VscReport> Reported Comments </button></NavLink>
+                                    <NavLink to={'/dasbord/Announcement'}><button className="btn btn-ghost btn-sm uppercase"><TfiAnnouncement size={20}></TfiAnnouncement> Make Announcement</button></NavLink>
+                                    <div className="divider"></div>
+                                    <NavLink to={'/'}><button className="btn btn-ghost btn-sm uppercase"><IoHome size={20}></IoHome>Home</button></NavLink>
                                 </div>
 
                                 :
@@ -95,7 +124,7 @@ const Dashbord = () => {
 
 
 
-                <div className="col-span-10">
+                <div className="xl:col-span-9 lg:col-span-9 md:col-span-10 max-sm:col-span-10">
                     {/* outlet */}
                     <Outlet></Outlet>
                 </div>

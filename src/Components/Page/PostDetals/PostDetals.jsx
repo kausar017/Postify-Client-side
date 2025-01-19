@@ -10,6 +10,7 @@ import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import { FaFacebook, FaTwitter } from "react-icons/fa6";
 import { FacebookShareButton, LinkedinShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share';
 import { IoLogoLinkedin, IoLogoWhatsapp } from "react-icons/io5";
+import UseAuth from "../../AuthenTication/UseAuth/UseAuth";
 
 
 const PostDetals = () => {
@@ -18,6 +19,8 @@ const PostDetals = () => {
     const [upVote, setUpVote] = useState(0);
     const [downVote, setDownVote] = useState(0);
     const { id } = useParams()
+
+    // const { user } = UseAuth()
 
     const {
         register,
@@ -30,7 +33,7 @@ const PostDetals = () => {
         // console.log(data);
         const info = {
             comentId: _id,
-            email: authorEmail,
+            email: UserEmail,
             ...data
         }
 
@@ -57,7 +60,7 @@ const PostDetals = () => {
     console.log(detals);
 
 
-    const { authorEmail, image, authorName, postTitle, postDescription, tag, carentTime, _id } = detals || {}
+    const { authorEmail, UserEmail, image, authorName, postTitle, postDescription, tag, carentTime, _id } = detals || {}
 
     if (isLoading) {
         return <Loader></Loader>
@@ -92,7 +95,7 @@ const PostDetals = () => {
         }
     };
 
-    
+
     const shareUrl = `${window.location.origin}/${_id}`
     const title = "Check this awesome website!";
 

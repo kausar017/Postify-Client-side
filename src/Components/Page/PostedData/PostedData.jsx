@@ -14,6 +14,20 @@ const PostedData = () => {
     const [sortByPopularity, setSortByPopularity] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
 
+    const [parPage, setParPage] = useState(5)
+    const [newPage, setNewPage] = useState(0)
+
+    // const 
+
+    const { data: tags = [], isPending } = useQuery({
+        queryKey: ['tags'],
+        queryFn: async () => {
+            const res = await axiosPiblic.get('/tags')
+            return res.data;
+        }
+    })
+
+    console.log(tags);
 
     // Comments data fetch with tanstack query
     const { data: coment = [] } = useQuery({
@@ -35,8 +49,8 @@ const PostedData = () => {
             return res.data;
         }
     });
-
-
+    
+    
     if (error) {
         return 'An error has occurred: ' + error.message;
     }
@@ -53,24 +67,17 @@ const PostedData = () => {
                         className="btn btn-primary ">
                         {sortByPopularity ? 'Sort by Newest' : 'Sort by Popularity'}
                     </button>
-                    <div>
-                        <button className="btn btn-sm">
+                    <div >
+                        {
+                            tags?.map((item, i) => {
+                                return (
+                                    <button key={i} className="btn btn-sm">
+                                        <div className="badge badge-secondary">{item?.tages}</div>
+                                    </button>
+                                );
+                            })
 
-                            <div className="badge badge-secondary">Technology</div>
-                        </button>
-                        <button className="btn btn-sm">
-
-                            <div className="badge badge-secondary">Science</div>
-                        </button>
-                        <button className="btn btn-sm">
-
-                            <div className="badge badge-secondary">Health</div>
-                        </button>
-                        <button className="btn btn-sm">
-
-                            <div className="badge badge-secondary">Education</div>
-                        </button>
-
+                        }
                     </div>
                 </div>
                 {isLoading ? (
@@ -93,7 +100,7 @@ const PostedData = () => {
                                         />
                                     </figure>
                                     <div className="p-5">
-                                        <h2 className="text-xl font-bold text-gray-800">{item?.title}</h2>
+                                        <h2 className="text-xl font-bold text-gray-800">{item?.postTitle}</h2>
                                         <p className="text-sm text-gray-600 mt-2">{item?.postDescription}</p>
                                         <div className="flex items-center justify-between mt-4">
                                             <div className="flex items-center space-x-2">
