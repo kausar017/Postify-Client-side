@@ -4,9 +4,7 @@ import { useLoaderData } from "react-router-dom";
 
 const Home = () => {
 
-  
-    
-
+   
     return (
         <div>
             <Helmet>

@@ -15,16 +15,19 @@ const UserProfile = () => {
     // console.log(user.email);
 
     // recent data fatching
-    const { isLoading, error, data: recent = [] } = useQuery({
-        queryKey: ['recentData'],
+    const { data: recent = [], isLoading, error, } = useQuery({
+        queryKey: ['allData', user?.email],
         queryFn: async () => {
             const res = await axiosPiblic.get(`/addpost?=${user?.email}`);
+            // console.log(res);
+
             return res.data;
         }
     });
 
     const recentPost = recent.filter(c => c.UserEmail === user?.email);
-    // console.log(recentPost);
+    const sorted = recentPost.sort((a, b) => new Date(b.carentTime) - new Date(a.carentTime));
+    // console.log(recent);
 
     // Comments data fetch with tanstack query
     const { data: coment = [], isLoading: lodaer } = useQuery({
@@ -47,7 +50,7 @@ const UserProfile = () => {
         return <Loader></Loader>
     }
 
-    console.log(userData);
+    // console.log(userData);
     const bageData = userData.filter(c => c.email === user?.email);
 
 
@@ -103,30 +106,11 @@ const UserProfile = () => {
                             <Loader></Loader>;
                         </div>
                     ) :
-
-
-
-                        // {
-                        //     "_id": "6788010ae6899dfa8b5471ef",
-                        //     "image": "https://t3.ftcdn.net/jpg/02/31/48/54/360_F_231485475_5XH3Qu3SXO2MbyHyqa60kSOO3z2YyE4u.jpg",
-                        //     "authorName": "Erica Bruce",
-                        //     "authorEmail": "doqogeh@mailinator.com",
-                        //     "postTitle": "Laudantium veniam ",
-                        //     "postDescription": "Monotonectally evisculate scalable resources rather than global e-tailers. Uniquely develop alternative alignments with B2C expertise. Proactively aggregate user-centric catalysts.",
-                        //     "tag": "health",
-                        //     "carentTime": "2025-01-15T18:40:10.305Z",
-                        //     "upVote": 1,
-                        //     "downVote": 0,
-                        //     "UserEmail": "mdkousarmia71@gmail.com",
-                        //     "UserName": "MD:Kausar Mia",
-                        //     "userPhoto": "https://lh3.googleusercontent.com/a/ACg8ocJBAjHsJzAHA_n9p6jMCUkEiahSCGKLpp5SztPj_R-WHOuS8uPabA=s96-c"
-                        // }
-
                         <div className='min-h-[500px]'>
                             {
-                                recentPost?.length > 0 ?
+                                sorted?.length > 0 ?
 
-                                    recentPost.slice(0, 3).map((item, index) => {
+                                    sorted?.slice(0, 3).map((item, index) => {
                                         const filteredComments = coment.filter(c => c.comentId === item._id);
                                         return < div key={index} className='my-5 border shadow-lg'>
                                             <div className="">

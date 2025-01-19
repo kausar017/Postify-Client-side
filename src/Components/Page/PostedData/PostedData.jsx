@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Bannar from '../Bannar/Bannar';
 import { FaDatabase } from 'react-icons/fa6';
+import Pagination from './Pagination';
 
 
 const PostedData = () => {
@@ -14,10 +15,18 @@ const PostedData = () => {
     const [sortByPopularity, setSortByPopularity] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
 
-    const [parPage, setParPage] = useState(5)
-    const [newPage, setNewPage] = useState(0)
+    // const [parPage, setParPage] = useState(5)
+    // const [newPage, setNewPage] = useState(0)
 
-    // const 
+    const [currentPage, setCurrentPage] = useState(1); // Current page state
+    const [postParPage, setPostParPage] = useState(5); // Posts per page
+
+
+    const lastPostIndex = currentPage * postParPage;
+    const firstPostIndex = lastPostIndex - postParPage;
+
+
+
 
     const { data: tags = [], isPending } = useQuery({
         queryKey: ['tags'],
@@ -27,7 +36,7 @@ const PostedData = () => {
         }
     })
 
-    console.log(tags);
+    // console.log(tags);
 
     // Comments data fetch with tanstack query
     const { data: coment = [] } = useQuery({
@@ -49,8 +58,10 @@ const PostedData = () => {
             return res.data;
         }
     });
-    
-    
+
+    console.log(poast.length);
+    const currentPosts = poast.slice(firstPostIndex, lastPostIndex);
+
     if (error) {
         return 'An error has occurred: ' + error.message;
     }
@@ -87,7 +98,9 @@ const PostedData = () => {
                 ) : poast?.length > 0 ? (
                     <div className="w-full max-w-4xl p-5 mx-auto space-y-6">
 
-                        {poast?.map((item, index) => {
+                        {/* poast */}
+
+                        {currentPosts?.map((item, index) => {
                             const filteredComments = coment.filter(c => c.comentId === item._id);
 
                             return (
@@ -145,7 +158,15 @@ const PostedData = () => {
                         <FaDatabase size={50}></FaDatabase>
                     </div>
                 )}
+
+                <Pagination
+                    totalPost={poast.length}
+                    postParPage={postParPage}
+                    setCurrentPage={setCurrentPage}
+                    currentPage={currentPage}
+                />
             </div>
+
 
         </>
 

@@ -46,7 +46,7 @@ const AddPost = () => {
             postTitle: data.Title,
             postDescription: data.Description,
             tag: data.Tag,
-            carentTime: new Date(),
+            carentTime: new Date().toISOString(),
             upVote: 0,
             downVote: 0,
             UserEmail: user?.email,
@@ -94,7 +94,7 @@ const AddPost = () => {
     return (
 
         <>
-            <DynamicTitle title='Add food'></DynamicTitle>
+            <DynamicTitle title='Add Post'></DynamicTitle>
 
             {bageData[0]?.bage == 'Gold' || postData?.length < 5 ?
 
