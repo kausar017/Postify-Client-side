@@ -2,8 +2,11 @@ import { createUserWithEmailAndPassword, GithubAuthProvider, GoogleAuthProvider,
 import { createContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import auth from "../firebase/Firebase.init";
+import useAxiosPiblic from "../../AllHooks/useAxiosPiblic";
 
 export const AuthContext = createContext();
+
+const axiosPiblic = useAxiosPiblic()
 
 const AuthProvaider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -54,19 +57,62 @@ const AuthProvaider = ({ children }) => {
         setUser,
     };
 
-    useEffect(() => {
-        const unsubscrive = onAuthStateChanged(auth, (currentUser) => {
-            if (currentUser) {
-                setUser(currentUser);
-            }
-            setLooder(false);
-            console.log(currentUser);
+    // useEffect(() => {
+    //     const unsubscrive = onAuthStateChanged(auth, (currentUser) => {
+    //         setUser(currentUser);
+    //         if (currentUser) {
+    //             const userInfo = { email: currentUser.email }
+    //             axiosPiblic.post('/jwt', userInfo)
+    //                 .then(res => {
+    //                     if (res.data.token) {
+    //                         localStorage.setItem('access-token', res.data.token)
+    //                     }
+    //                 })
+    //         } else {
+    //             localStorage.removeItem('access-token')
+    //         }
+    //         setLooder(false);
+    //         console.log(currentUser);
 
+    //     });
+    //     return () => {
+    //         unsubscrive();
+    //     };
+    // }, []);
+
+    useEffect(() => {
+        const unsubcribe = onAuthStateChanged(auth, async (currentUser) => {
+            try {
+                if (currentUser?.email) {
+                    setUser(currentUser);
+
+                    // Generate token
+                    const { data } = await axiosPiblic.post(`/jwt`,
+                        { email: currentUser?.email },
+                        { withCredentials: true }
+                    );
+                    console.log('Token generated:', data);
+                } else {
+                    setUser(null);
+
+                    // Logout request
+                    const { data } = await axiosPiblic.get(`/logout`,
+                        { withCredentials: true }
+                    );
+                    console.log('Logged out:', data);
+                }
+            } catch (error) {
+                console.error('Error in onAuthStateChanged:', error);
+            } finally {
+                setLooder(false);
+            }
         });
-        return () => {
-            unsubscrive();
-        };
+
+        // Properly unsubscribe on cleanup
+        return () => unsubcribe();
     }, []);
+
+
 
     return (
         <AuthContext.Provider value={authInfo}>

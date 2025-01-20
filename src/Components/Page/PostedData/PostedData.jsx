@@ -59,7 +59,7 @@ const PostedData = () => {
         }
     });
 
-    console.log(poast.length);
+    // console.log(poast.length);
     const currentPosts = poast.slice(firstPostIndex, lastPostIndex);
 
     if (error) {
