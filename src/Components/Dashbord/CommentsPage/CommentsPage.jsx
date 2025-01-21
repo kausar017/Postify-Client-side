@@ -31,7 +31,6 @@ const CommentsPage = () => {
     }
 
     const filteredComments = coment.filter(c => c.comentId === id);
-    // console.log(filteredComments);
 
 
     const feedbackOptions = [
@@ -42,22 +41,28 @@ const CommentsPage = () => {
 
     const handleFeedbackChange = (id, feedback) => {
         setSelectedFeedback((prev) => ({ ...prev, [id]: feedback }));
-   
+
 
     };
 
     const handleReport = async (id) => {
         const feedback = selectedFeedback[id];
-        console.log(feed);
-        
+
         if (!feedback) {
             toast.error("Please select feedback before reporting!");
             return;
         }
 
+
+        const feedbackInfo = {
+            commentId: id,
+            feedback: feedback,
+            filteredComments: filteredComments,
+        };
+
         try {
             // API call to report the comment
-            await axiosPiblic.post(`feedback/${id}`, { feedback });
+            await axiosPiblic.post(`/feedback/${id}`, feedbackInfo);
             setReported((prev) => ({ ...prev, [id]: true }));
             toast.success("Comment reported successfully!");
         } catch (error) {
@@ -65,6 +70,7 @@ const CommentsPage = () => {
             toast.error("Failed to report comment.");
         }
     };
+
 
     return (
         <div className="container mx-auto p-4">

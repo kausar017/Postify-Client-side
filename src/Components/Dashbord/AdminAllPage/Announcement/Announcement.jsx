@@ -4,19 +4,18 @@ import React, { useState } from 'react';
 import useAxiosPiblic from "../../../AllHooks/useAxiosPiblic";
 import toast from "react-hot-toast";
 import UseAuth from "../../../AuthenTication/UseAuth/UseAuth";
-import { useQuery } from "@tanstack/react-query";
-import Loader from "../../../Page/Loader/Loader";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 const axiosPiblic = useAxiosPiblic()
 const Announcement = () => {
     const { user } = UseAuth()
     const { photoURL, displayName } = user;
-
+    const queryClient = useQueryClient();
 
     const { data: announcements = [], refetch } = useQuery({
         queryKey: ['announcements'],
         queryFn: async () => {
             const res = await axiosPiblic.get('/announcement')
-            refetch()
+            // refetch()
             return res.data;
         }
     })
@@ -33,6 +32,7 @@ const Announcement = () => {
             await axiosPiblic.post('/announcement', data);
             toast.success(`Announcement successfully`);
             reset()
+            queryClient.invalidateQueries(['announcements'])
             // navigate(from, { replace: true });
         } catch (error) {
             toast.error("Error announcement post.");

@@ -12,7 +12,7 @@ const SosalLogin = () => {
     const axiosPiblic = useAxiosPiblic()
     const { handaleGoogle, user } = UseAuth()
 
-    console.log(user);
+    // console.log(user);
 
 
     const handaleGoogleLogin = async (e) => {

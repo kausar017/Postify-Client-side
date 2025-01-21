@@ -19,6 +19,7 @@ import ManageUser from "../../Dashbord/AdminAllPage/ManageUser/ManageUser";
 import Reported from "../../Dashbord/AdminAllPage/ReportedComments/Reported";
 import Announcement from "../../Dashbord/AdminAllPage/Announcement/Announcement";
 import UserAnnounce from "../../Dashbord/DashbordPage/userAnnounce/UserAnnounce";
+import AdminRoute from "../../AllHooks/AdminRoute/AdminRoute";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -92,7 +93,9 @@ const Router = createBrowserRouter([
       // admin route
       {
         path: '/dasbord/adminProfile',
-        element: <PrivetRout><AdminProfile></AdminProfile></PrivetRout>
+        element: <PrivetRout>
+          <AdminProfile></AdminProfile>
+        </PrivetRout>
       },
       {
         path: '/dasbord/managUser',

@@ -4,10 +4,7 @@ import ChackOut from './ChackOut';
 const stripePromiz = loadStripe(import.meta.env.VITE_STRIP_KEY)
 const Membership = () => {
 
-    const handaleCackOUt = (e) => {
-        e.preventDefault()
-    }
-
+  
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">

@@ -12,10 +12,14 @@ import { VscReport } from "react-icons/vsc";
 import { TfiAnnouncement } from "react-icons/tfi";
 import useAxiosPiblic from "../AllHooks/useAxiosPiblic";
 import { useQuery } from "@tanstack/react-query";
+import useAdmin from "../AllHooks/adminVerify/useAdmin";
+import useAxiosSecure from "../AllHooks/axiosSecure/useAxiosSecure";
 
 const Dashbord = () => {
     const axiosPiblic = useAxiosPiblic()
-    const isAdmin = false
+    const axiosSecure = useAxiosSecure()
+    const [isAdmin] = useAdmin()
+    // const isAdmin = true
 
     const { data: announcements = [], refetch } = useQuery({
         queryKey: ['announcements'],
@@ -26,14 +30,16 @@ const Dashbord = () => {
         }
     })
     // console.log(announcements);
+
+
     return (
-        <div className="">
+        <div className="w-full max-w-11/12  mx-auto">
             <Helmet>
                 <title>Postify | dasahbord</title>
             </Helmet>
 
 
-            <div className="grid grid-cols-12 min-h-screen">
+            <div className="grid grid-cols-12  min-h-screen">
 
                 {isAdmin ?
 
@@ -120,11 +126,7 @@ const Dashbord = () => {
                 </div>
 
 
-
-
-
-
-                <div className="xl:col-span-9 lg:col-span-9 md:col-span-10 max-sm:col-span-10">
+                <div className="xl:col-span-10 lg:col-span-9 md:col-span-10 max-sm:col-span-10">
                     {/* outlet */}
                     <Outlet></Outlet>
                 </div>

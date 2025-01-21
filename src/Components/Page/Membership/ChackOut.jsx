@@ -32,7 +32,7 @@ const ChackOut = () => {
     })
 
     const bageData = userData.filter(c => c?.email === user?.email);
-    console.log(bageData[0]?.email);
+    // console.log(bageData[0]?.email);
 
 
 

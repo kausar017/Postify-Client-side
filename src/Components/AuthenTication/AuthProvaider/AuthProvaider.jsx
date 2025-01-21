@@ -10,7 +10,7 @@ const axiosPiblic = useAxiosPiblic()
 
 const AuthProvaider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [looder, setLooder] = useState(true);
+    const [looder, setLoader] = useState(true);
 
     const googleProvaider = new GoogleAuthProvider();
     const handaleGoogle = () => {
@@ -57,62 +57,40 @@ const AuthProvaider = ({ children }) => {
         setUser,
     };
 
-    // useEffect(() => {
-    //     const unsubscrive = onAuthStateChanged(auth, (currentUser) => {
-    //         setUser(currentUser);
-    //         if (currentUser) {
-    //             const userInfo = { email: currentUser.email }
-    //             axiosPiblic.post('/jwt', userInfo)
-    //                 .then(res => {
-    //                     if (res.data.token) {
-    //                         localStorage.setItem('access-token', res.data.token)
-    //                     }
-    //                 })
-    //         } else {
-    //             localStorage.removeItem('access-token')
-    //         }
-    //         setLooder(false);
-    //         console.log(currentUser);
-
-    //     });
-    //     return () => {
-    //         unsubscrive();
-    //     };
-    // }, []);
 
     useEffect(() => {
-        const unsubcribe = onAuthStateChanged(auth, async (currentUser) => {
-            try {
-                if (currentUser?.email) {
-                    setUser(currentUser);
-
-                    // Generate token
-                    const { data } = await axiosPiblic.post(`/jwt`,
-                        { email: currentUser?.email },
-                        { withCredentials: true }
-                    );
-                    console.log('Token generated:', data);
-                } else {
-                    setUser(null);
-
-                    // Logout request
-                    const { data } = await axiosPiblic.get(`/logout`,
-                        { withCredentials: true }
-                    );
-                    console.log('Logged out:', data);
-                }
-            } catch (error) {
-                console.error('Error in onAuthStateChanged:', error);
-            } finally {
-                setLooder(false);
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            setUser(currentUser);
+            if (currentUser) {
+                // get token
+                const userInfo = { email: currentUser.email };
+                axiosPiblic.post('/jwt', userInfo)
+                    .then(res => {
+                        if (res.data.token) {
+                            localStorage.setItem('access-token', res.data.token);
+                            setLoader(false);
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Error fetching token:', err);
+                        setLoader(false);
+                    });
+            } else {
+                // remove token
+                localStorage.removeItem('access-token');
+                setLoader(false);
             }
+
+            console.log(currentUser);
         });
 
-        // Properly unsubscribe on cleanup
-        return () => unsubcribe();
-    }, []);
+        return () => {
+            unsubscribe(); 
+        };
+    }, [axiosPiblic]);
 
 
+    console.log({ user, looder });
 
     return (
         <AuthContext.Provider value={authInfo}>

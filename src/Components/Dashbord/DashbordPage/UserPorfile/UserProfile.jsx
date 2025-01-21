@@ -112,9 +112,9 @@ const UserProfile = () => {
 
                                     sorted?.slice(0, 3).map((item, index) => {
                                         const filteredComments = coment.filter(c => c.comentId === item._id);
-                                        return < div key={index} className='my-5 border shadow-lg'>
+                                        return < div key={index} className='my-5 shadow-lg'>
                                             <div className="">
-                                                <div className="hero-content flex-col lg:flex-row">
+                                                <div className="hero-content flex-col justify-stretch lg:flex-row">
                                                     <img
                                                         src={item?.image}
                                                         className="w-full max-w-sm h-52 rounded-lg shadow-2xl object-cover" />
