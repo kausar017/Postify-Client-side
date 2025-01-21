@@ -48,7 +48,7 @@ const MyPost = () => {
             return res.data;
         }
     });
-    console.log(coment);
+    // console.log(coment);
 
     // const filteredComments = coment.filter(c => c.comentId === item?._id);
 

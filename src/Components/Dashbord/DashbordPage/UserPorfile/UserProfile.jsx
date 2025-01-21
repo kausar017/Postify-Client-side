@@ -76,7 +76,7 @@ const UserProfile = () => {
                             <div className="flex justify-center gap-4">
 
                                 {bageData && Array.isArray(bageData) && bageData.map((user, i) => {
-                                    console.log(user?.bage);
+                                    // console.log(user?.bage);
 
                                     return (
                                         <div key={i}>

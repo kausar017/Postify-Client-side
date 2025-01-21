@@ -13,7 +13,7 @@ const Navber = () => {
     const axiosPiblic = useAxiosPiblic()
     const axiosSecure = UseAxiosSecure()
     const [isAdmin] = useAdmin()
-    console.log(isAdmin);
+    // console.log(isAdmin);
 
     const link = <>
         <NavLink to={'/'}><button className="btn btn-ghost btn-sm">Home</button></NavLink>
@@ -125,10 +125,10 @@ const Navber = () => {
                                 <span className="flex flex-col md:hidden">{link}</span>
 
                                 {
-                                    user && isAdmin && <Link to={'/dasbord/adminProfile'}>Dashboard</Link>
+                                    user && isAdmin && <Link to={'/dasbord/adminProfile'} className="ml-3">Dashboard</Link>
                                 }
                                 {
-                                    user && isAdmin && <Link className={` ml-3`} to={"/dasbord/profile"}>Dashboard</Link>
+                                    user && !isAdmin && <Link className={` ml-3`} to={"/dasbord/profile"}>Dashboard</Link>
                                 }
 
                                 <Link className={`${admin ? 'ml-3 hidden' : 'ml-3 '}`} to={"/dasbord/profile"}>Dashboard</Link>

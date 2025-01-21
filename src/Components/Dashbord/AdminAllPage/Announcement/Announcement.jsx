@@ -5,8 +5,11 @@ import useAxiosPiblic from "../../../AllHooks/useAxiosPiblic";
 import toast from "react-hot-toast";
 import UseAuth from "../../../AuthenTication/UseAuth/UseAuth";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-const axiosPiblic = useAxiosPiblic()
+import useAxiosSecure from "../../../AllHooks/axiosSecure/useAxiosSecure";
+// const axiosPiblic = useAxiosPiblic()
+
 const Announcement = () => {
+    const axiosSecure = useAxiosSecure()
     const { user } = UseAuth()
     const { photoURL, displayName } = user;
     const queryClient = useQueryClient();
@@ -14,7 +17,7 @@ const Announcement = () => {
     const { data: announcements = [], refetch } = useQuery({
         queryKey: ['announcements'],
         queryFn: async () => {
-            const res = await axiosPiblic.get('/announcement')
+            const res = await axiosSecure.get('/announcement')
             // refetch()
             return res.data;
         }
@@ -29,7 +32,7 @@ const Announcement = () => {
     const onSubmit = async data => {
         // console.log(data)
         try {
-            await axiosPiblic.post('/announcement', data);
+            await axiosSecure.post('/announcement', data);
             toast.success(`Announcement successfully`);
             reset()
             queryClient.invalidateQueries(['announcements'])

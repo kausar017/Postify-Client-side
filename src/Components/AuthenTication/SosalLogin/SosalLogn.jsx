@@ -19,7 +19,7 @@ const SosalLogin = () => {
 
         handaleGoogle()
             .then((result) => {
-                console.log(result.user?.displayName);
+                // console.log(result.user?.displayName);
 
                 const userData = {
                     bage: 'Bronze',

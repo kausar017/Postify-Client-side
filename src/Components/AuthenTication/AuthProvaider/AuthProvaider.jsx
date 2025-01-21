@@ -81,7 +81,7 @@ const AuthProvaider = ({ children }) => {
                 setLoader(false);
             }
 
-            console.log(currentUser);
+            // console.log(currentUser);
         });
 
         return () => {
@@ -90,7 +90,7 @@ const AuthProvaider = ({ children }) => {
     }, [axiosPiblic]);
 
 
-    console.log({ user, looder });
+    // console.log({ user, looder });
 
     return (
         <AuthContext.Provider value={authInfo}>

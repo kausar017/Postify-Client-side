@@ -8,15 +8,17 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { MdOutlinePostAdd } from 'react-icons/md';
 import { FaCommentAlt, FaUser, FaUsers } from "react-icons/fa";
+import useAxiosSecure from '../../../AllHooks/axiosSecure/useAxiosSecure';
 
 const AdminProfile = () => {
     const axiosPublic = useAxiosPiblic();
+    const axiosSecure = useAxiosSecure()
     const { user } = UseAuth();
 
-    const { register, handleSubmit,  formState: { errors }, reset } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     const onSubmit = async data => {
-        console.log(data)
+        // console.log(data)
 
         try {
 
@@ -31,8 +33,6 @@ const AdminProfile = () => {
     };
 
 
-
-
     const { data: totalUser = [], isLoading: userLoading } = useQuery({
         queryKey: ['bage'],
         queryFn: async () => {
@@ -44,7 +44,7 @@ const AdminProfile = () => {
     const { data: coment = [] } = useQuery({
         queryKey: ['queary'],
         queryFn: async () => {
-            const res = await axiosPublic('/coment');
+            const res = await axiosPublic.get('/coment');
             return res.data;
         }
     });
@@ -52,7 +52,7 @@ const AdminProfile = () => {
     const { data: posts = [], isLoading: postsLoading } = useQuery({
         queryKey: ['post'],
         queryFn: async () => {
-            const res = await axiosPublic.get('/adminProfile');
+            const res = await axiosSecure.get('/adminProfile');
             return res.data;
         }
     });
@@ -83,15 +83,15 @@ const AdminProfile = () => {
                                 </div>
                                 <div className="stat-title text-white">Total Posts</div>
                                 <div className="stat-value text-white">{posts?.length}</div>
-                               
+
                             </div>
                             <div className="stat w-full max-w-96  bg-pink-700 rounded-xl">
                                 <div className="stat-figure text-white">
-                                   <FaCommentAlt size={25}></FaCommentAlt>
+                                    <FaCommentAlt size={25}></FaCommentAlt>
                                 </div>
                                 <div className="stat-title text-white">Total Comments</div>
                                 <div className="stat-value text-white">{coment?.length}</div>
-                               
+
                             </div>
                             <div className="stat w-full max-w-96 bg-lime-600 rounded-xl">
                                 <div className="stat-figure text-white">
@@ -99,9 +99,9 @@ const AdminProfile = () => {
                                 </div>
                                 <div className="stat-title text-white">Total Users</div>
                                 <div className="stat-value text-white">{totalUser?.length}</div>
-                               
+
                             </div>
-                
+
                         </div>
                         <div className="flex justify-center">
                             <PieChart

@@ -8,7 +8,7 @@ const PrivetRout = ({ children }) => {
     const location = useLocation()
 
     const { user, looder } = UseAuth()
-    console.log({user, looder});
+    // console.log({user, looder});
 
     if (looder) {
         return <Loader></Loader>

@@ -37,7 +37,7 @@ const AddPost = () => {
     } = useForm()
 
     const onSubmit = async (data) => {
-        console.log(data)
+        // console.log(data)
 
         const userInfo = {
             image: data.photoUrl,

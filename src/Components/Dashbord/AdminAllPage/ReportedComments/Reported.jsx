@@ -4,14 +4,16 @@ import useAxiosPiblic from "../../../AllHooks/useAxiosPiblic";
 import Loader from "../../../Page/Loader/Loader";
 import { AiOutlineDelete } from "react-icons/ai";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../../AllHooks/axiosSecure/useAxiosSecure";
 
 const Reported = () => {
     const axiosPiblic = useAxiosPiblic()
+    const axiosSecure = useAxiosSecure()
     const queryClient = useQueryClient();
     const { data: report, isLoading } = useQuery({
         queryKey: ['comentsReport'],
         queryFn: async () => {
-            const res = await axiosPiblic.get('/reported')
+            const res = await axiosSecure.get('/reported')
             return res.data;
         }
     })
@@ -23,11 +25,11 @@ const Reported = () => {
     }
 
     const handaleDelet = async (id) => {
-        console.log(id);
+        // console.log(id);
         const confirmDelete = window.confirm("Are you sure you want to delete this post?");
         if (confirmDelete) {
             try {
-                await axiosPiblic.delete(`/deletFeedback/${id}`)
+                await axiosSecure.delete(`/deletFeedback/${id}`)
                 toast.success('Delet Success')
                 queryClient.invalidateQueries(['comentsReport', report])
             } catch (error) {

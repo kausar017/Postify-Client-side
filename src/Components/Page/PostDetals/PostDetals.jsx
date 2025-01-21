@@ -57,7 +57,7 @@ const PostDetals = () => {
         }
     })
 
-    console.log(detals);
+    // console.log(detals);
 
 
     const { authorEmail, UserEmail, image, authorName, postTitle, postDescription, tag, carentTime, _id } = detals || {}

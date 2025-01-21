@@ -9,7 +9,7 @@ import UseAxiosSecure from "../../../AllHooks/axiosSecure/useAxiosSecure";
 import { GrUserAdmin } from "react-icons/gr";
 
 const ManageUser = () => {
-    const axiosPiblic = useAxiosPiblic();
+    // const axiosPiblic = useAxiosPiblic();
     const queryClient = useQueryClient();
     const axiosSecure = UseAxiosSecure()
     const [search, setSearch] = useState('')
@@ -19,15 +19,15 @@ const ManageUser = () => {
     const { data: userData = [], isLoading, refetch } = useQuery({
         queryKey: ["users", search],
         queryFn: async () => {
-            const res = await axiosPiblic.get(`/users?search=${search}`);
+            const res = await axiosSecure.get(`/users?search=${search}`);
             queryClient.invalidateQueries(["users", search])
             return res.data;
         },
     });
-    console.log(userData);
+    // console.log(userData);
 
     const handaleAdmin = async (id) => {
-        console.log(id);
+        // console.log(id);
         try {
             // Optimistically update the userData in the UI
             queryClient.setQueryData(["users", search], (oldData) => {
@@ -37,7 +37,7 @@ const ManageUser = () => {
             });
 
             // API call to update role on the server
-            await axiosPiblic.put(`/adminUpdate/${id}`, {
+            await axiosSecure.put(`/adminUpdate/${id}`, {
                 role: 'admin',
             });
 

@@ -15,8 +15,9 @@ import { useQuery } from "@tanstack/react-query";
 import useAdmin from "../AllHooks/adminVerify/useAdmin";
 import useAxiosSecure from "../AllHooks/axiosSecure/useAxiosSecure";
 
+
 const Dashbord = () => {
-    const axiosPiblic = useAxiosPiblic()
+    // const axiosPiblic = useAxiosPiblic()
     const axiosSecure = useAxiosSecure()
     const [isAdmin] = useAdmin()
     // const isAdmin = true
@@ -24,7 +25,7 @@ const Dashbord = () => {
     const { data: announcements = [], refetch } = useQuery({
         queryKey: ['announcements'],
         queryFn: async () => {
-            const res = await axiosPiblic.get('/announcement')
+            const res = await axiosSecure.get('/announcement')
             refetch()
             return res.data;
         }

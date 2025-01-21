@@ -29,7 +29,7 @@ const Login = () => {
     } = useForm()
 
     const onSubmit = async (data) => {
-        console.log(data)
+        // console.log(data)
         try {
             await handalLogin(data.email, data.password)
             toast.success('Login Successfuly', {
