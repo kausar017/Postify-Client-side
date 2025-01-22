@@ -49,9 +49,11 @@ const ManageUser = () => {
             });
 
             // API call to update role on the server
-            await axiosSecure.put(`/adminUpdate/${id}`, {
+            const res = await axiosSecure.put(`/adminUpdate/${id}`, {
                 role: 'admin',
             });
+      
+            
 
             queryClient.invalidateQueries(["users", search]);
             toast.success("Make admin success");

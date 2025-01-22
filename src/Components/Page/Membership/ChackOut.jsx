@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import useAxiosPiblic from '../../AllHooks/useAxiosPiblic';
 import { useQuery } from '@tanstack/react-query';
 import UseAuth from '../../AuthenTication/UseAuth/UseAuth';
+import useAxiosSecure from '../../AllHooks/axiosSecure/useAxiosSecure';
 
 const ChackOut = () => {
     const stripe = useStripe();
@@ -12,6 +13,7 @@ const ChackOut = () => {
     const [errors, setError] = useState('');
     const [clientSecret, setClientSecret] = useState('');
     const axiosPiblic = useAxiosPiblic();
+    // const axiosSecure = useAxiosSecure()
 
     const { user } = UseAuth()
 
@@ -51,12 +53,14 @@ const ChackOut = () => {
         event.preventDefault();
 
         try {
-            await axiosPiblic.put(`/users/${bageData[0]?.email}`, {
+            const res = await axiosPiblic.put(`/users/${bageData[0]?.email}`, {
                 bage: 'Gold',
             });
+            // console.log(res);
         } catch (error) {
-            console.error("Upvote failed:", error);
+            console.error("failed:", error);
         }
+
 
         if (!stripe || !elements) {
             return;

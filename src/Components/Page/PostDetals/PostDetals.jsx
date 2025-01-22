@@ -10,7 +10,6 @@ import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import { FaFacebook, FaTwitter } from "react-icons/fa6";
 import { FacebookShareButton, LinkedinShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share';
 import { IoLogoLinkedin, IoLogoWhatsapp } from "react-icons/io5";
-import UseAuth from "../../AuthenTication/UseAuth/UseAuth";
 
 
 const PostDetals = () => {
@@ -96,7 +95,8 @@ const PostDetals = () => {
     };
 
 
-    const shareUrl = `${window.location.origin}/${_id}`
+    // const shareUrl = `${window.location.origin}/${_id}`
+    const shareUrl = `https://postify-foram-web.netlify.app/detals/67908865bc6b6eb63c9455d0`
     const title = "Check this awesome website!";
 
     return (

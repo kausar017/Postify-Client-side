@@ -23,7 +23,7 @@ const AdminProfile = () => {
 
         try {
 
-            await axiosPublic.post('/tags', data);
+            await axiosSecure.post('/tags', data);
             toast.success(`Tag added successfully`);
             reset()
             // navigate(from, { replace: true });
