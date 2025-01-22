@@ -4,7 +4,7 @@ import UseAuth from "../../AuthenTication/UseAuth/UseAuth";
 import useAxiosSecure from "../axiosSecure/useAxiosSecure";
 import useAxiosPiblic from "../useAxiosPiblic";
 
-const useAdmin = () => {
+const UseAdmin = () => {
     const { user, loading } = UseAuth()
     const axiosSecure = useAxiosSecure()
     const axiosPiblic=useAxiosPiblic()
@@ -21,4 +21,4 @@ const useAdmin = () => {
     return [isAdmins, isAdminLoading]
 };
 
-export default useAdmin;
+export default UseAdmin;

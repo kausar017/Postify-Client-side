@@ -10,16 +10,15 @@ import { GrUserAdmin } from "react-icons/gr";
 import { MdManageAccounts } from "react-icons/md";
 import { VscReport } from "react-icons/vsc";
 import { TfiAnnouncement } from "react-icons/tfi";
-import useAxiosPiblic from "../AllHooks/useAxiosPiblic";
 import { useQuery } from "@tanstack/react-query";
-import useAdmin from "../AllHooks/adminVerify/useAdmin";
 import useAxiosSecure from "../AllHooks/axiosSecure/useAxiosSecure";
+import UseAdmin from "../AllHooks/adminVerify/useAdmin";
 
 
 const Dashbord = () => {
     // const axiosPiblic = useAxiosPiblic()
+    const [isAdmin] = UseAdmin()
     const axiosSecure = useAxiosSecure()
-    const [isAdmin] = useAdmin()
     // const isAdmin = true
 
     const { data: announcements = [], refetch } = useQuery({
@@ -69,18 +68,7 @@ const Dashbord = () => {
                             <div className="divider"></div>
                             <div className="flex flex-col space-y-1">
                                 <NavLink to={'/'}><button className="btn btn-ghost btn-sm uppercase"><IoHome size={20}></IoHome>Home</button></NavLink>
-                                <div>
-                                    {
-                                        announcements.length === 0 ?
-
-
-                                            ""
-
-                                            :
-                                            <NavLink to={'/dasbord/Announce'}><button className="btn btn-ghost btn-sm uppercase animate-bounce"><TfiAnnouncement size={20}></TfiAnnouncement>Announcement <span className="badge badge-sm indicator-item ">{announcements?.length}</span></button></NavLink>
-                                    }
-
-                                </div>
+                                
                             </div>
                         </div>
                     </>

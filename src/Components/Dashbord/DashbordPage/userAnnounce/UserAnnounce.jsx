@@ -1,14 +1,14 @@
 import React from 'react';
 import DynamicTitle from '../../../Shared/DynamicTitle/DynamicTitle';
 import { useQuery } from '@tanstack/react-query';
-import useAxiosPiblic from '../../../AllHooks/useAxiosPiblic';
+import useAxiosSecure from '../../../AllHooks/axiosSecure/useAxiosSecure';
 
 const UserAnnounce = () => {
-
+    const axiosSecure = useAxiosSecure()
     const { data: announcements = [], refetch } = useQuery({
         queryKey: ['announcements'],
         queryFn: async () => {
-            const res = await useAxiosPiblic.get('/announcement')
+            const res = await axiosSecure.get('/announcement')
             refetch()
             return res.data;
         }

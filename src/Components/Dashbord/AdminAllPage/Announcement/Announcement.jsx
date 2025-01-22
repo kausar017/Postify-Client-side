@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import UseAuth from "../../../AuthenTication/UseAuth/UseAuth";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../../AllHooks/axiosSecure/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 // const axiosPiblic = useAxiosPiblic()
 
 const Announcement = () => {
@@ -46,6 +47,9 @@ const Announcement = () => {
 
     return (
         <>
+            <Helmet>
+                <title>Postify | Annunsment</title>
+            </Helmet>
             <DynamicTitle title="Announcement" />
             <div className="p-4 w-full max-w-5xl mx-auto">
                 {/* Notification Icon */}

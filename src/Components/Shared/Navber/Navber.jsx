@@ -6,13 +6,13 @@ import './Navber.css'
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPiblic from "../../AllHooks/useAxiosPiblic";
 import UseAxiosSecure from "../../AllHooks/axiosSecure/useAxiosSecure";
-import useAdmin from "../../AllHooks/adminVerify/useAdmin";
+import UseAdmin from "../../AllHooks/adminVerify/useAdmin";
 const Navber = () => {
 
     const { user, handalLogout } = UseAuth()
     const axiosPiblic = useAxiosPiblic()
     const axiosSecure = UseAxiosSecure()
-    const [isAdmin] = useAdmin()
+    const [isAdmin] = UseAdmin()
     // console.log(isAdmin);
 
     const link = <>
@@ -33,7 +33,7 @@ const Navber = () => {
     const { data: announcements = [], refetch } = useQuery({
         queryKey: ['announcements'],
         queryFn: async () => {
-            const res = await axiosPiblic.get('/announcement')
+            const res = await axiosSecure.get('/announcement')
             refetch()
             return res.data;
         }
@@ -45,7 +45,7 @@ const Navber = () => {
     const { data: adminData = [], isLoading } = useQuery({
         queryKey: ['admin'],
         queryFn: async () => {
-            const res = await axiosPiblic.get(`/users`);
+            const res = await axiosSecure.get(`/users`);
             // queryClient.invalidateQueries(["users", search])
             return res.data;
         },
@@ -70,23 +70,14 @@ const Navber = () => {
                     </div>
                     <div className={`${"dropdown dropdown-end"}`}>
                         {
-                            admin?.length ?
-                                ""
-                                :
-                                <>
-                                    {
-                                        user && <>
-                                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-                                                <Link to={`${announcements?.length === 0 ? "" : '/dasbord/Announce'}`} className={`indicator ${announcements.length === 0 ? '' : 'animate-bounce'}`}>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e6e6e6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"></path></svg>
-                                                    <span className="badge badge-sm indicator-item">{announcements.length === 0 ? "0" : announcements?.length}</span>
-                                                </Link>
-                                            </div>
-                                        </>
-                                    }
-                                </>
+                            user && !isAdmin &&
+                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+                                <Link className={`indicator ${announcements.length === 0 ? '' : 'animate-bounce'}`}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e6e6e6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"></path></svg>
+                                    <span className="badge badge-sm indicator-item">{announcements.length === 0 ? "0" : announcements?.length}</span>
+                                </Link>
+                            </div>
                         }
-
 
                     </div>
 
@@ -131,7 +122,7 @@ const Navber = () => {
                                     user && !isAdmin && <Link className={` ml-3`} to={"/dasbord/profile"}>Dashboard</Link>
                                 }
 
-                                <Link className={`${admin ? 'ml-3 hidden' : 'ml-3 '}`} to={"/dasbord/profile"}>Dashboard</Link>
+                                {/* <Link className={`${admin ? 'ml-3 hidden' : 'ml-3 '}`} to={"/dasbord/profile"}>Dashboard</Link> */}
                                 <li className="ml-3" onClick={logout}>Logout</li>
                             </ul>
                         </div>

@@ -1,18 +1,20 @@
 import { Helmet } from "react-helmet-async";
 import PostedData from "../PostedData/PostedData";
-import { useLoaderData } from "react-router-dom";
+import UserAnnounce from "../../Dashbord/DashbordPage/userAnnounce/UserAnnounce";
 
 const Home = () => {
 
-   
+
     return (
-        <div>
+        <div className="p-0 m-0">
             <Helmet>
                 <title>Postify | Home</title>
             </Helmet>
 
             {/* posted data */}
             <PostedData></PostedData>
+            {/* annaunsment */}
+            <UserAnnounce></UserAnnounce>
         </div>
     );
 };

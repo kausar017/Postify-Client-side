@@ -7,6 +7,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import DynamicTitle from '../../../Shared/DynamicTitle/DynamicTitle';
 import Loader from '../../../Page/Loader/Loader';
+import { Helmet } from 'react-helmet-async';
 
 const AddPost = () => {
 
@@ -94,6 +95,9 @@ const AddPost = () => {
     return (
 
         <>
+            <Helmet>
+                <title>Postify | Add Post</title>
+            </Helmet>
             <DynamicTitle title='Add Post'></DynamicTitle>
 
             {bageData[0]?.bage == 'Gold' || postData?.length < 5 ?

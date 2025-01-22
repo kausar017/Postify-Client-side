@@ -15,11 +15,9 @@ const PostedData = () => {
     const [sortByPopularity, setSortByPopularity] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
 
-    // const [parPage, setParPage] = useState(5)
-    // const [newPage, setNewPage] = useState(0)
 
-    const [currentPage, setCurrentPage] = useState(1); // Current page state
-    const [postParPage, setPostParPage] = useState(5); // Posts per page
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postParPage, setPostParPage] = useState(5);
 
 
     const lastPostIndex = currentPage * postParPage;
@@ -80,7 +78,7 @@ const PostedData = () => {
                     </button>
                     <div >
                         {
-                            tags?.map((item, i) => {
+                            tags?.map((item, i) => {    
                                 return (
                                     <button key={i} className="btn btn-sm">
                                         <div className="badge badge-secondary">{item?.tages}</div>
@@ -159,14 +157,16 @@ const PostedData = () => {
                     </div>
                 )}
 
+            </div>
+            <div className='bg-base-300 py-3'>
                 <Pagination
                     totalPost={poast.length}
                     postParPage={postParPage}
                     setCurrentPage={setCurrentPage}
                     currentPage={currentPage}
+                    total='Total Post'
                 />
             </div>
-
 
         </>
 

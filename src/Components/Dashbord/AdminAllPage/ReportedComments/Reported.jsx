@@ -5,12 +5,24 @@ import Loader from "../../../Page/Loader/Loader";
 import { AiOutlineDelete } from "react-icons/ai";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../AllHooks/axiosSecure/useAxiosSecure";
+import TabilPagination from "../../../AllHooks/TabilPagination";
+import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const Reported = () => {
-    const axiosPiblic = useAxiosPiblic()
     const axiosSecure = useAxiosSecure()
     const queryClient = useQueryClient();
-    const { data: report, isLoading } = useQuery({
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postParPage, setPostParPage] = useState(10);
+
+
+    const lastPostIndex = currentPage * postParPage;
+    const firstPostIndex = lastPostIndex - postParPage;
+
+
+
+    const { data: report = [], isLoading } = useQuery({
         queryKey: ['comentsReport'],
         queryFn: async () => {
             const res = await axiosSecure.get('/reported')
@@ -18,7 +30,7 @@ const Reported = () => {
         }
     })
 
-
+    const currentReport = report.slice(firstPostIndex, lastPostIndex);
 
     if (isLoading) {
         return <Loader></Loader>
@@ -39,8 +51,11 @@ const Reported = () => {
     }
     return (
         <>
+            <Helmet>
+                <title>Postify | Reported</title>
+            </Helmet>
             <DynamicTitle title="Reported Comments"></DynamicTitle>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto w-full max-w-7xl mx-auto min-h-[750px]">
                 <table className="table">
                     {/* head */}
                     <thead>
@@ -57,7 +72,7 @@ const Reported = () => {
                     </thead>
                     <tbody>
 
-                        {report.map((item, i) => {
+                        {currentReport.map((item, i) => {
                             const filteredComment = item?.filteredComments?.[0];
                             return (
                                 <tr key={i} className="hover">
@@ -87,8 +102,17 @@ const Reported = () => {
 
                     </tbody>
                 </table>
-            </div>
 
+            </div>
+            <div>
+                <TabilPagination
+                    totalPost={report.length}
+                    postParPage={postParPage}
+                    setCurrentPage={setCurrentPage}
+                    currentPage={currentPage}
+                    Total='Total Report'
+                />
+            </div>
 
         </>
     );

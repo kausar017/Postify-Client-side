@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 import { MdOutlinePostAdd } from 'react-icons/md';
 import { FaCommentAlt, FaUser, FaUsers } from "react-icons/fa";
 import useAxiosSecure from '../../../AllHooks/axiosSecure/useAxiosSecure';
+import { Helmet } from 'react-helmet-async';
 
 const AdminProfile = () => {
     const axiosPublic = useAxiosPiblic();
@@ -56,12 +57,16 @@ const AdminProfile = () => {
             return res.data;
         }
     });
+    // console.log(posts);
 
     if (userLoading || postsLoading) return <Loader />;
 
 
     return (
         <>
+            <Helmet>
+                <title>Postify | Admin Profile</title>
+            </Helmet>
             <DynamicTitle title='Admin Profile' />
             <div className="container mx-auto ">
                 <div className="bg-white shadow-lg rounded-lg p-6 min-h-screen">

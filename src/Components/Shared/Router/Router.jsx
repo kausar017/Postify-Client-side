@@ -19,6 +19,7 @@ import ManageUser from "../../Dashbord/AdminAllPage/ManageUser/ManageUser";
 import Reported from "../../Dashbord/AdminAllPage/ReportedComments/Reported";
 import Announcement from "../../Dashbord/AdminAllPage/Announcement/Announcement";
 import UserAnnounce from "../../Dashbord/DashbordPage/userAnnounce/UserAnnounce";
+// import UseAdmin from "../../AllHooks/adminVerify/UseAdmin";
 import AdminRoute from "../../AllHooks/AdminRoute/AdminRoute";
 const Router = createBrowserRouter([
   {
@@ -94,20 +95,28 @@ const Router = createBrowserRouter([
       {
         path: '/dasbord/adminProfile',
         element: <PrivetRout>
-          <AdminProfile></AdminProfile>
+          <AdminRoute>
+            <AdminProfile></AdminProfile>
+          </AdminRoute>
         </PrivetRout>
       },
       {
         path: '/dasbord/managUser',
-        element: <PrivetRout><ManageUser></ManageUser></PrivetRout>
+        element: <PrivetRout>
+          <AdminRoute><ManageUser></ManageUser></AdminRoute>
+        </PrivetRout>
       },
       {
         path: '/dasbord/reportComents',
-        element: <PrivetRout><Reported></Reported></PrivetRout>
+        element: <PrivetRout>
+          <AdminRoute><Reported></Reported></AdminRoute>
+        </PrivetRout>
       },
       {
         path: '/dasbord/Announcement',
-        element: <PrivetRout><Announcement></Announcement></PrivetRout>
+        element: <PrivetRout>
+          <AdminRoute><Announcement></Announcement></AdminRoute>
+        </PrivetRout>
       },
     ]
   }

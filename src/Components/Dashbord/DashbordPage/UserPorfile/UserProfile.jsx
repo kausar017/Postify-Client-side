@@ -6,6 +6,7 @@ import { FaDatabase } from 'react-icons/fa6';
 import Loader from '../../../Page/Loader/Loader';
 import { format } from 'date-fns';
 import DynamicTitle from '../../../Shared/DynamicTitle/DynamicTitle';
+import { Helmet } from 'react-helmet-async';
 
 const UserProfile = () => {
 
@@ -56,7 +57,9 @@ const UserProfile = () => {
 
     return (
         <>
-
+            <Helmet>
+                <title>Postify | MyProfile</title>
+            </Helmet>
             <div className='bg-gray-100 py-10'>
                 <DynamicTitle title='My Profile'></DynamicTitle>
                 <div className="flex flex-col justify-center items-center">
