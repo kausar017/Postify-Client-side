@@ -117,13 +117,13 @@ const AddPost = () => {
                                 <label className="label">
                                     <span className="label-text">Author Name</span>
                                 </label>
-                                <input type="text"{...register("name")} placeholder="password" className="input input-bordered" required />
+                                <input type="text"{...register("name")} placeholder="Author Name" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Author Email</span>
                                 </label>
-                                <input type="email"{...register("Email")} placeholder="password" className="input input-bordered" required />
+                                <input type="email"{...register("Email")} placeholder="Author Email" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
