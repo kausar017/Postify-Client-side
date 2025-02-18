@@ -16,7 +16,7 @@ const UseAdmin = () => {
             // console.log(res.data);
             return res.data?.admin;
         },
-        enabled: !!user?.email,
+        // enabled: !!user?.email,
     });
     return [isAdmins, isAdminLoading]
 };

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import UseAuth from "../../AuthenTication/UseAuth/UseAuth";
 
 const axiosSecure = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: "https://postify-five.vercel.app",
 });
 
 const useAxiosSecure = () => {

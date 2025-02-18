@@ -29,7 +29,7 @@ const MyPost = () => {
             const res = await axiosPiblic.get(`/addpost?email=${user?.email}`);
             return res.data;
         },
-        enabled: !!user?.email,
+        // enabled: !!user?.email,
     });
 
     const postData = recent.filter(c => c.UserEmail === user?.email);

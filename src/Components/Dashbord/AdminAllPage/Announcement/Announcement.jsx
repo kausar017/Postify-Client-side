@@ -11,6 +11,7 @@ import { Helmet } from "react-helmet-async";
 
 const Announcement = () => {
     const axiosSecure = useAxiosSecure()
+    const axiosPiblic = useAxiosPiblic()
     const { user } = UseAuth()
     const { photoURL, displayName } = user;
     const queryClient = useQueryClient();
@@ -18,7 +19,7 @@ const Announcement = () => {
     const { data: announcements = [], refetch } = useQuery({
         queryKey: ['announcements'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/announcement')
+            const res = await axiosPiblic.get('/announcement')
             // refetch()
             return res.data;
         }

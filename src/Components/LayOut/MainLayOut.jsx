@@ -11,7 +11,6 @@ const MainLayOut = () => {
             {/* outlet */}
             <div className="min-h-[calc(100vh-14px)] pt-16">
                 <Outlet></Outlet>
-
             </div>
             {/* Footer */}
             <Footer></Footer>
