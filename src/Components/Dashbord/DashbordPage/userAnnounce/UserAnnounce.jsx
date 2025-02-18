@@ -40,6 +40,7 @@ const UserAnnounce = () => {
                                         }</p>
                                     </div>
                                 </div>
+                                hello
                                 <p className="mt-2">{announcement?.Description}</p>
                             </div>
                         </div>
