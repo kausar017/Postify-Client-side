@@ -69,7 +69,7 @@ const PostedData = () => {
         <>
             <Bannar searchQuery={searchQuery} setSearchQuery={setSearchQuery}></Bannar>
 
-            <div className='bg-gray-200 min-h-screen'>
+            <div className=' min-h-screen'>
                 <div className='w-full flex flex-wrap items-center space-x-3 max-w-4xl p-2 mx-auto'>
                     <button
                         onClick={() => setSortByPopularity(!sortByPopularity)}
