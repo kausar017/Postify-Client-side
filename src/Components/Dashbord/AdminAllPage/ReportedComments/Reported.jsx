@@ -59,7 +59,7 @@ const Reported = () => {
                 <table className="table">
                     {/* head */}
                     <thead>
-                        <tr className="text-black ">
+                        <tr className="text-lg/3">
                             <th></th>
                             <th>Commenter Emall</th>
                             <th>coment</th>

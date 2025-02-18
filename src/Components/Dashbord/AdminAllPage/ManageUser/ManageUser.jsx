@@ -63,10 +63,6 @@ const ManageUser = () => {
     };
 
 
-    // // Loader for pending data
-    // if (isLoading) {
-    //     return <Loader />;
-    // }
 
     return (
         <>
@@ -106,7 +102,7 @@ const ManageUser = () => {
                         <table className="table">
                             {/* Table Head */}
                             <thead>
-                                <tr className="text-black">
+                                <tr className="font-bold">
                                     <th>#</th>
                                     <th>User Name</th>
                                     <th>User Email</th>

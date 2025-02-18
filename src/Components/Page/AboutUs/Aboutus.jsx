@@ -6,11 +6,11 @@ const AboutUs = () => {
   }, []);
 
   return (
-    <div className="bg-gray-200/20">
+    <div className="">
       <section className=" flex flex-col justify-center items-center min-h-[640px] ">
         <div className="container mx-auto px-6  ">
           <h2 className="text-3xl font-bold text-center mb-8">About Us</h2>
-          <div className="flex flex-col md:flex-row items-center gap-8">
+          <div className="flex flex-col md:flex-row items-center gap-8 shadow-md p-5">
             {/* Image */}
             <div className="md:w-1/2">
               <img
@@ -21,7 +21,7 @@ const AboutUs = () => {
             </div>
 
             {/* Text Content */}
-            <div className="md:w-1/2 text-gray-700">
+            <div className="md:w-1/2">
               <h3 className="text-2xl font-semibold mb-4">
                 🚀 Welcome to Postify - Your Ultimate Blogging Platform!
               </h3>

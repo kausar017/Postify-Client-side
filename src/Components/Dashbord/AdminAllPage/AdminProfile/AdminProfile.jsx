@@ -69,7 +69,7 @@ const AdminProfile = () => {
             </Helmet>
             <DynamicTitle title='Admin Profile' />
             <div className="container mx-auto ">
-                <div className="bg-white shadow-lg rounded-lg p-6 min-h-screen">
+                <div className=" shadow-lg rounded-lg p-6 min-h-screen">
                     <div className="flex items-center justify-center mb-6">
                         <img
                             referrerPolicy='no-referrer'
@@ -80,8 +80,8 @@ const AdminProfile = () => {
                     </div>
                     <div className='flex lg:flex-row md:flex-col max-sm:flex-col items-center justify-around'>
                         <div className="space-y-3 mb-6">
-                            <p className="text-2xl font-semibold text-gray-600">Name: {user?.displayName}</p>
-                            <p className="text-lg font-semibold text-gray-600">Email: {user?.email}</p>
+                            <p className="text-2xl font-semibold ">Name: {user?.displayName}</p>
+                            <p className="text-lg font-semibold ">Email: {user?.email}</p>
                             <div className="stat w-full max-w-96  bg-red-500 rounded-xl">
                                 <div className="stat-figure text-white">
                                     <MdOutlinePostAdd size={30}></MdOutlinePostAdd>
