@@ -114,7 +114,7 @@ const Dashbord = () => {
           <>
             <div className="dark:bg-pink-600/60 scroll-smooth col-span-2 space-y-3 xl:block lg:block md:hidden max-sm:hidden pt-3">
               <div className="flex flex-col px-2 space-y-2">
-                <div className="">
+                <div className="flex items-center">
                   <img className="w-full max-w-[100px]" src={logo} alt={logo} />
                   <div className="flex-none">
                     <button

@@ -104,7 +104,7 @@ const AddPost = () => {
 
 
                 <div className='w-full max-w-2xl mx-auto my-5 '>
-                    <div className="card bg-base-100 shadow-lg">
+                    <div className="card bg- shadow-xl border">
 
                         <form onSubmit={handleSubmit(onSubmit)} className=" p-5">
                             <div className="form-control">
