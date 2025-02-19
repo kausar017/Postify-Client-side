@@ -1,0 +1,38 @@
+[
+  {
+    "question": "What is this forum about?",
+    "answer": "This is a community forum where users can discuss various topics, ask questions, and help each other."
+  },
+  {
+    "question": "How do I create an account on the forum?",
+    "answer": "Click on the 'Sign Up' button and register with your name, email, and password."
+  },
+  {
+    "question": "How can I post on the forum?",
+    "answer": "After logging in, click on the 'Create Post' button, write your question or opinion, and publish it."
+  },
+  {
+    "question": "What should I do if I forget my password?",
+    "answer": "Click on the 'Forgot Password' option and enter your email to reset your password."
+  },
+  {
+    "question": "How can I update my profile information?",
+    "answer": "Go to your profile settings, where you can update your name, profile picture, and other details."
+  },
+  {
+    "question": "Can I delete my account?",
+    "answer": "Yes, you can request account deletion from the settings, or contact support for assistance."
+  },
+  {
+    "question": "What types of posts are allowed?",
+    "answer": "You can post questions, discussions, and helpful resources related to the forum's topics."
+  },
+  {
+    "question": "Are there any posting rules?",
+    "answer": "Yes, follow community guidelines—avoid spam, hate speech, and inappropriate content."
+  },
+  {
+    "question": "How can I report a post?",
+    "answer": "Click on the 'Report' button under a post and select the reason for reporting."
+  }
+]

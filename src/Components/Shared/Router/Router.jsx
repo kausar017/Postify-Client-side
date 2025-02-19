@@ -1,6 +1,4 @@
-import {
-  createBrowserRouter,
-} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import MainLayOut from "../../LayOut/MainLayOut";
 import Login from "../../AuthenTication/Login/Login";
 import SignUp from "../../AuthenTication/SignUp/SignUp";
@@ -21,6 +19,9 @@ import Announcement from "../../Dashbord/AdminAllPage/Announcement/Announcement"
 import UserAnnounce from "../../Dashbord/DashbordPage/userAnnounce/UserAnnounce";
 // import UseAdmin from "../../AllHooks/adminVerify/UseAdmin";
 import AdminRoute from "../../AllHooks/AdminRoute/AdminRoute";
+import AboutUs from "../../Page/AboutUs/Aboutus";
+import Contact from "../../Page/Contact/Contact";
+import FAQHelpSection from "../../Page/FAQHelpSection/FAQHelpSection";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -28,98 +29,144 @@ const Router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <Home></Home>,
       },
       {
-        path: '/detals/:id',
-        element: <PrivetRout>
-          <PostDetals></PostDetals>
-        </PrivetRout>
+        path: "/userannauns",
+        element: <UserAnnounce />,
       },
       {
-        path: '/member',
-        element: <PrivetRout>
-          <Membership></Membership>
-        </PrivetRout>
+        path: "/aboutus",
+        element: <AboutUs />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/fqa",
+        element: <FAQHelpSection />,
+      },
+      {
+        path: "/detals/:id",
+        element: (
+          <PrivetRout>
+            <PostDetals></PostDetals>
+          </PrivetRout>
+        ),
+      },
+      {
+        path: "/member",
+        element: (
+          <PrivetRout>
+            <Membership></Membership>
+          </PrivetRout>
+        ),
       },
     ],
   },
   {
-    path: '/login',
-    element: <Login></Login>
+    path: "/login",
+    element: <Login></Login>,
   },
   {
-    path: '/signup',
-    element: <SignUp></SignUp>
+    path: "/signup",
+    element: <SignUp></SignUp>,
   },
   {
     // dashbord
-    path: '/dasbord',
-    element: <PrivetRout>
-      <Dashbord></Dashbord>
-    </PrivetRout>,
+    path: "/dasbord",
+    element: (
+      <PrivetRout>
+        <Dashbord></Dashbord>
+      </PrivetRout>
+    ),
     children: [
       // user route
       {
-        path: '/dasbord/profile',
-        element: <PrivetRout>
-          <UserProfile></UserProfile>
-        </PrivetRout>
+        path: "/dasbord/profile",
+        element: (
+          <PrivetRout>
+            <UserProfile></UserProfile>
+          </PrivetRout>
+        ),
       },
       {
-        path: '/dasbord/addpost',
-        element: <PrivetRout>
-          <AddPost></AddPost>
-        </PrivetRout>
+        path: "/dasbord/addpost",
+        element: (
+          <PrivetRout>
+            <AddPost></AddPost>
+          </PrivetRout>
+        ),
       },
       {
-        path: '/dasbord/myPost',
-        element: <PrivetRout>
-          <MyPost></MyPost>
-        </PrivetRout>
+        path: "/dasbord/myPost",
+        element: (
+          <PrivetRout>
+            <MyPost></MyPost>
+          </PrivetRout>
+        ),
       },
       {
-        path: '/dasbord/comment/:id',
-        element: <PrivetRout>
-          <CommentsPage></CommentsPage>
-        </PrivetRout>
+        path: "/dasbord/comment/:id",
+        element: (
+          <PrivetRout>
+            <CommentsPage></CommentsPage>
+          </PrivetRout>
+        ),
       },
       {
-        path: '/dasbord/Announce',
-        element: <PrivetRout>
-          <UserAnnounce></UserAnnounce>
-        </PrivetRout>
+        path: "/dasbord/Announce",
+        element: (
+          <PrivetRout>
+            <UserAnnounce></UserAnnounce>
+          </PrivetRout>
+        ),
       },
       // admin route
       {
-        path: '/dasbord/adminProfile',
-        element: <PrivetRout>
-          <AdminRoute>
-            <AdminProfile></AdminProfile>
-          </AdminRoute>
-        </PrivetRout>
+        path: "/dasbord/adminProfile",
+        element: (
+          <PrivetRout>
+            <AdminRoute>
+              <AdminProfile></AdminProfile>
+            </AdminRoute>
+          </PrivetRout>
+        ),
       },
       {
-        path: '/dasbord/managUser',
-        element: <PrivetRout>
-          <AdminRoute><ManageUser></ManageUser></AdminRoute>
-        </PrivetRout>
+        path: "/dasbord/managUser",
+        element: (
+          <PrivetRout>
+            <AdminRoute>
+              <ManageUser></ManageUser>
+            </AdminRoute>
+          </PrivetRout>
+        ),
       },
       {
-        path: '/dasbord/reportComents',
-        element: <PrivetRout>
-          <AdminRoute><Reported></Reported></AdminRoute>
-        </PrivetRout>
+        path: "/dasbord/reportComents",
+        element: (
+          <PrivetRout>
+            <AdminRoute>
+              <Reported></Reported>
+            </AdminRoute>
+          </PrivetRout>
+        ),
       },
       {
-        path: '/dasbord/Announcement',
-        element: <PrivetRout>
-          <AdminRoute><Announcement></Announcement></AdminRoute>
-        </PrivetRout>
+        path: "/dasbord/Announcement",
+        element: (
+          <PrivetRout>
+            <AdminRoute>
+              <Announcement></Announcement>
+            </AdminRoute>
+          </PrivetRout>
+        ),
       },
-    ]
-  }
+    ],
+  },
 ]);
 
 export default Router;

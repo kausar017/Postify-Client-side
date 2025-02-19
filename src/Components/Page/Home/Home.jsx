@@ -4,6 +4,7 @@ import UserAnnounce from "../../Dashbord/DashbordPage/userAnnounce/UserAnnounce"
 import UseAuth from "../../AuthenTication/UseAuth/UseAuth";
 import AboutUs from "../AboutUs/Aboutus";
 import Contact from "../Contact/Contact";
+import FAQHelpSection from "../FAQHelpSection/FAQHelpSection";
 
 const Home = () => {
   const { user } = UseAuth();
@@ -19,8 +20,9 @@ const Home = () => {
       {/* annaunsment */}
       <UserAnnounce></UserAnnounce>
 
+      <FAQHelpSection />
       <AboutUs />
-      <Contact/>
+      <Contact />
     </div>
   );
 };

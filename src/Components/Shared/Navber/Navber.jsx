@@ -21,6 +21,18 @@ const Navber = () => {
       <NavLink to={"/member"}>
         <button className="btn btn-ghost btn-sm ">Membership</button>
       </NavLink>
+      <NavLink to={"/userannauns"}>
+        <button className="btn btn-ghost btn-sm ">Announce</button>
+      </NavLink>
+      <NavLink to={"/aboutus"}>
+        <button className="btn btn-ghost btn-sm ">About Us</button>
+      </NavLink>
+      <NavLink to={"/contact"}>
+        <button className="btn btn-ghost btn-sm ">Contact</button>
+      </NavLink>
+      <NavLink to={"/fqa"}>
+        <button className="btn btn-ghost btn-sm ">FAQ</button>
+      </NavLink>
     </>
   );
 
