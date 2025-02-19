@@ -1,11 +1,9 @@
 import React from "react";
 import DynamicTitle from "../../Shared/DynamicTitle/DynamicTitle";
-import useAxiosPiblic from "../../AllHooks/useAxiosPiblic";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../Loader/Loader";
 
 export default function FAQHelpSection() {
-  const axiosPiblic = useAxiosPiblic();
 
   const {
     data: fqdata = {},
@@ -22,13 +20,13 @@ export default function FAQHelpSection() {
   if (isLoading) {
     return <Loader />;
   }
-  console.log(fqdata);
+  // console.log(fqdata);
 
   return (
     <>
       <DynamicTitle title="FAQ/Help Section" />
 
-      <div className="py-5">
+      <div className="py-5 md:px-3">
         {fqdata?.map((item, i) => (
           <div key={i} className="w-full max-w-6xl mx-auto pt-5">
             <div tabIndex={0} className="collapse bg-base-200">

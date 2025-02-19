@@ -13,7 +13,7 @@ const UserAnnounce = () => {
       return res.data;
     },
   });
-  console.log(announcements);
+  // console.log(announcements);
 
   return (
     <div className="">

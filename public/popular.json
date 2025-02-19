@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "title": "How to Learn JavaScript Fast?",
+    "description": "A quick guide on mastering JavaScript in 30 days...",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNt_g-7y9BnALvcj6SpY0AqMz6OWKhwDco0g&s",
+    "views": 1200,
+    "likes": 350,
+    "comments": 45,
+    "author": "John Doe",
+    "date": "2025-02-19"
+  },
+  {
+    "id": 2,
+    "title": "Best React Libraries in 2025",
+    "description": "Discover the best React UI libraries for faster development...",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdc9YHvWxagJHJ01g6MGWCf6i-PmkBSNSGyw&s",
+    "views": 850,
+    "likes": 210,
+    "comments": 30,
+    "author": "Jane Smith",
+    "date": "2025-02-18"
+  },
+  {
+    "id": 3,
+    "title": "Understanding Async/Await in JavaScript",
+    "description": "A deep dive into asynchronous programming in JavaScript...",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0M-ZbA6llx-oHU5iSXaCrWMkAWA8XmnuIsA&s",
+    "views": 950,
+    "likes": 280,
+    "comments": 55,
+    "author": "Emily Johnson",
+    "date": "2025-02-17"
+  },
+  {
+    "id": 4,
+    "title": "Introduction to TypeScript for Beginners",
+    "description": "Learn the basics of TypeScript and how to get started...",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-gp-lAAaaW2-SKdm-Z5SKuyj8NfhQ_TYdAg&s",
+    "views": 720,
+    "likes": 180,
+    "comments": 25,
+    "author": "Michael Brown",
+    "date": "2025-02-16"
+  },
+  {
+    "id": 5,
+    "title": "Mastering CSS Grid Layout",
+    "description": "Learn how to create complex web layouts using CSS Grid...",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXvCcv5oyD2jSk9MiMWPoKjuDZsAmrk5NUew&s",
+    "views": 1300,
+    "likes": 400,
+    "comments": 70,
+    "author": "Sarah Williams",
+    "date": "2025-02-15"
+  },
+  {
+    "id": 6,
+    "title": "Mastering Git for Version Control",
+    "description": "A complete guide to using Git effectively in your projects...",
+    "image": "https://i.ytimg.com/vi/Uszj_k0DGsg/maxresdefault.jpg",
+    "views": 1450,
+    "likes": 500,
+    "comments": 95,
+    "author": "David Miller",
+    "date": "2025-02-14"
+  }
+]

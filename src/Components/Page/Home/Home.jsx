@@ -5,6 +5,7 @@ import UseAuth from "../../AuthenTication/UseAuth/UseAuth";
 import AboutUs from "../AboutUs/Aboutus";
 import Contact from "../Contact/Contact";
 import FAQHelpSection from "../FAQHelpSection/FAQHelpSection";
+import PopularPostsSection from "../PopularPostsSection/PopularPostsSection";
 
 const Home = () => {
   const { user } = UseAuth();
@@ -21,6 +22,7 @@ const Home = () => {
       <UserAnnounce></UserAnnounce>
 
       <FAQHelpSection />
+      <PopularPostsSection />
       <AboutUs />
       <Contact />
     </div>
