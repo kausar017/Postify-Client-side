@@ -129,7 +129,7 @@ const PostedData = () => {
                                             </div>
                                         </div>
                                         <div className="flex flex-wrap max-sm:space-y-2 justify-between items-center mt-4">
-                                            <Link to={`/detals/${item?._id}`} className="btn btn-primary btn-sm">Details</Link>
+                                            <Link to={`/detals/${item?._id}`} className="btn bg-pink-600/60 text-white btn-sm">Details</Link>
                                             <button className="btn btn-sm">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                                                 <div className="badge badge-secondary">{filteredComments.length}</div>

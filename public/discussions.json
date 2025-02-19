@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "category": "Latest Discussions",
+    "title": "React vs Vue: Which is better?",
+    "replies": 12,
+    "lastReply": "2 hours ago"
+  },
+  {
+    "id": 2,
+    "category": "Trending Topics",
+    "title": "Best Tailwind Components for 2025",
+    "replies": 8,
+    "lastReply": "1 day ago"
+  },
+  {
+    "id": 3,
+    "category": "Questions & Answers",
+    "title": "How to use useEffect properly?",
+    "replies": 15,
+    "lastReply": "3 hours ago"
+  },
+  {
+    "id": 4,
+    "category": "General Chat",
+    "title": "Your Favorite JavaScript Framework?",
+    "replies": 5,
+    "lastReply": "4 hours ago"
+  }
+]

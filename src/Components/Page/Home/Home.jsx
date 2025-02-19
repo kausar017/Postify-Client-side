@@ -6,6 +6,7 @@ import AboutUs from "../AboutUs/Aboutus";
 import Contact from "../Contact/Contact";
 import FAQHelpSection from "../FAQHelpSection/FAQHelpSection";
 import PopularPostsSection from "../PopularPostsSection/PopularPostsSection";
+import Discussions from "../discussions/discussions";
 
 const Home = () => {
   const { user } = UseAuth();
@@ -23,6 +24,7 @@ const Home = () => {
 
       <FAQHelpSection />
       <PopularPostsSection />
+      <Discussions/>
       <AboutUs />
       <Contact />
     </div>

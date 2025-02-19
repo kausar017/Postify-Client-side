@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import DynamicTitle from "../../Shared/DynamicTitle/DynamicTitle";
 
 const AboutUs = () => {
   useEffect(() => {
@@ -9,7 +10,7 @@ const AboutUs = () => {
     <div className="">
       <section className=" flex flex-col justify-center items-center min-h-[640px] ">
         <div className="container mx-auto px-6  ">
-          <h2 className="text-3xl font-bold text-center mb-8">About Us</h2>
+          <DynamicTitle title="About Us" />
           <div className="flex flex-col md:flex-row items-center gap-8 shadow-md p-5">
             {/* Image */}
             <div className="md:w-1/2">

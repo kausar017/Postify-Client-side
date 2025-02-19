@@ -2,10 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import Loader from "../Loader/Loader";
 import DynamicTitle from "../../Shared/DynamicTitle/DynamicTitle";
+import { Link } from "react-router-dom";
 
 export default function PopularPostsSection() {
   const {
-    data: popular = {},
+    data: popular = [],
     isLoading,
     isError,
   } = useQuery({
@@ -20,14 +21,14 @@ export default function PopularPostsSection() {
     return <Loader />;
   }
   // console.log(fqdata);
-  console.log(popular);
+  // console.log(popular);
   if (isLoading) {
     return <Loader />;
   }
   return (
     <div>
       <DynamicTitle title="🔥 Trending Posts" />
-      <div className="trending-posts container mx-auto px-4 py-8">
+      <div className="trending-posts w-full max-w-7xl mx-auto px-4 py-8">
         <div className="grid  lg:grid-cols-3 md:grid-cols-2 gap-6">
           {Array.isArray(popular) && popular.length > 0 ? (
             popular.map((post, i) => (
@@ -41,19 +42,23 @@ export default function PopularPostsSection() {
                   className="w-full h-56 object-cover rounded-t-lg"
                 />
                 <div className="p-4">
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-800 mb-2">
+                  <h3 className="text-xl font-semibold mb-2">
                     {post?.title}
                   </h3>
-                  <p className="text-gray-900 mb-4">{post?.description}</p>
-                  <p className="text-sm text-gray-900 mb-4">
+                  <p className="mb-4">{post?.description}</p>
+                  <p className="text-sm mb-4">
                     👀 {post?.views} | ❤️ {post?.likes} | 💬 {post?.comments}
                   </p>
                   <p className="text-xs text-gray-500 mb-4">
                     ✍️ {post?.author} | 📅 {post?.date}
                   </p>
-                  <button className="btn bg-pink-600/60 w-full mt-4">
+                  <Link
+                    to={post?.hraf}
+                    target="_blanck"
+                    className="btn bg-pink-600/60 w-full mt-4"
+                  >
                     Read More
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))

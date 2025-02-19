@@ -22,6 +22,7 @@ import AdminRoute from "../../AllHooks/AdminRoute/AdminRoute";
 import AboutUs from "../../Page/AboutUs/Aboutus";
 import Contact from "../../Page/Contact/Contact";
 import FAQHelpSection from "../../Page/FAQHelpSection/FAQHelpSection";
+import PopularPostsSection from "../../Page/PopularPostsSection/PopularPostsSection";
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -47,6 +48,10 @@ const Router = createBrowserRouter([
       {
         path: "/fqa",
         element: <FAQHelpSection />,
+      },
+      {
+        path: "/Trending",
+        element: <PopularPostsSection />,
       },
       {
         path: "/detals/:id",

@@ -8,7 +8,8 @@
     "likes": 350,
     "comments": 45,
     "author": "John Doe",
-    "date": "2025-02-19"
+    "date": "2025-02-19",
+    "hraf": "https://metacognitive.me/wp-content/uploads/2024/06/best-ways-to-learn-javascript.jpg"
   },
   {
     "id": 2,
@@ -19,7 +20,8 @@
     "likes": 210,
     "comments": 30,
     "author": "Jane Smith",
-    "date": "2025-02-18"
+    "date": "2025-02-18",
+    "hraf": "https://www.capitalnumbers.com/blog/wp-content/uploads/2025/02/Top-React-Libraries-to-Build-Faster-Scalable-Apps-in-2025_AW.png"
   },
   {
     "id": 3,
@@ -30,7 +32,8 @@
     "likes": 280,
     "comments": 55,
     "author": "Emily Johnson",
-    "date": "2025-02-17"
+    "date": "2025-02-17",
+    "hraf": "https://images.app.goo.gl/quTjCYXYsKp41R8s9"
   },
   {
     "id": 4,
@@ -41,7 +44,8 @@
     "likes": 180,
     "comments": 25,
     "author": "Michael Brown",
-    "date": "2025-02-16"
+    "date": "2025-02-16",
+    "hraf": "https://images.app.goo.gl/21oEaX24aMqYJ8hy8"
   },
   {
     "id": 5,
@@ -52,7 +56,8 @@
     "likes": 400,
     "comments": 70,
     "author": "Sarah Williams",
-    "date": "2025-02-15"
+    "date": "2025-02-15",
+    "hraf": "https://images.app.goo.gl/JwuRQudUpmTrRMbM6"
   },
   {
     "id": 6,
@@ -63,6 +68,7 @@
     "likes": 500,
     "comments": 95,
     "author": "David Miller",
-    "date": "2025-02-14"
+    "date": "2025-02-14",
+    "hraf": "https://images.app.goo.gl/Mb8rQhznEnFy9nBT7"
   }
 ]

@@ -18,9 +18,11 @@ const Navber = () => {
       <NavLink to={"/"}>
         <button className="btn btn-ghost btn-sm">Home</button>
       </NavLink>
-      <NavLink to={"/member"}>
-        <button className="btn btn-ghost btn-sm ">Membership</button>
-      </NavLink>
+      {user && (
+        <NavLink to={"/member"}>
+          <button className="btn btn-ghost btn-sm ">Membership</button>
+        </NavLink>
+      )}
       <NavLink to={"/userannauns"}>
         <button className="btn btn-ghost btn-sm ">Announce</button>
       </NavLink>
@@ -33,6 +35,10 @@ const Navber = () => {
       <NavLink to={"/fqa"}>
         <button className="btn btn-ghost btn-sm ">FAQ</button>
       </NavLink>
+      <NavLink to={"/Trending"}>
+        <button className="btn btn-ghost btn-sm ">Trending</button>
+      </NavLink>
+      
     </>
   );
 
@@ -108,7 +114,7 @@ const Navber = () => {
           </div>
         </div>
         <div className="flex-none">
-          <div className="max-sm:hidden">{link}</div>
+          <div className="md:hidden lg:block max-sm:hidden">{link}</div>
           <div className={`${"dropdown dropdown-end"}`}>
             {user && (
               <div
@@ -171,7 +177,7 @@ const Navber = () => {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-5 shadow space-y-2"
               >
                 <li className="ml-3">{user?.displayName}</li>
-                <span className="flex flex-col md:hidden">{link}</span>
+                <span className="flex flex-col lg:hidden">{link}</span>
 
                 {user && isAdmin && (
                   <Link to={"/dasbord/adminProfile"} className="ml-3">

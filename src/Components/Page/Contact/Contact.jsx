@@ -3,6 +3,7 @@ import emailLottie from "../../../assets/Lottify/Email.json";
 import emailjs from "@emailjs/browser"; // ✅ Correct Import
 import { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
+import DynamicTitle from "../../Shared/DynamicTitle/DynamicTitle";
 
 const Contact = () => {
   const form = useRef();
@@ -38,10 +39,8 @@ const Contact = () => {
     <div className="py-12">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4 ">Contact</h1>
-          <p className="text-lg ">
-            Feel free to reach out to me anytime.
-          </p>
+          <DynamicTitle title="Contact" />
+          <p className="text-lg ">Feel free to reach out to me anytime.</p>
         </div>
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="w-full md:w-1/2 mb-8 md:mb-0">
